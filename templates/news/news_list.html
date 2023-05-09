@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <title>News list</title>
+</head>
+
+<body>
+    <div class="container">
+    {% for news in news_list %}
+        <div class="card">
+            <div class="card-header">
+                News
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ news.title }}</h5>
+                <p class="card-text">{{ news.body }}</p>
+                <a href="{% url 'detail_page' news.pk %}" class="btn btn-primary">Go detail page</a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</body>
+
+</html>
