@@ -14,3 +14,11 @@ def detail_page(request, id):
     context = {"news": news}
 
     return render(request, "news/detail.html", context)
+
+
+def homePageView(request):
+    news = News.published.all()
+    category = Category.objects.all()
+    context = {"news": news, "category": category}
+
+    return render(request, "news/home.html", context)
