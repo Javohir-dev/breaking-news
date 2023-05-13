@@ -22,3 +22,15 @@ def homePageView(request):
     context = {"news": news, "category": category}
 
     return render(request, "news/home.html", context)
+
+
+def contactPageView(request):
+    context = {}
+
+    return render(request, "news/contact.html", context)
+
+
+def errorPageView(request):
+    context = {}
+
+    return render(request, "news/404-page.html", context)
