@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView
 from .models import News, Category
 from .forms import ContactForm
 
@@ -26,15 +27,39 @@ def homePageView(request):
     return render(request, "news/home.html", context)
 
 
-def contactPageView(request):
-    form = ContactForm(request.POST or None)
-    if request.method == "POST" and form.is_valid():
-        form.save()
-        # return HttpResponse("<h1>Thank you for message!</h1>")
+class ContactPageView(TemplateView):
+    template_name = "news/contact.html"
 
-    context = {"form": form}
+    def get(self, request, *args, **kwargs):
+        form = ContactForm()
+        context = {"form": form}
 
-    return render(request, "news/contact.html", context)
+        return render(request, "news/contact.html", context)
+
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(request.POST)
+        if request.method == "POST" and form.is_valid():
+            form.save()
+            # return HttpResponse("<h1>Thank you for message!</h1>")
+
+        context = {"form": form}
+
+        return render(request, "news/contact.html", context)
+
+
+class ErrorPageView(TemplateView):
+    template_name = "news/404-page.html"
+
+
+# def contactPageView(request):
+#     form = ContactForm(request.POST or None)
+#     if request.method == "POST" and form.is_valid():
+#         form.save()
+#         return HttpResponse("<h1>Thank you for message!</h1>")
+
+#     context = {"form": form}
+
+#     return render(request, "news/contact.html", context)
 
 
 def errorPageView(request):
