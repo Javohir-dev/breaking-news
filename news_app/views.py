@@ -16,13 +16,13 @@ def detail_page(request, id):
     news = get_object_or_404(News, id=id, status=News.Status.Published)
     context = {"news": news}
 
-    return render(request, "news/detail.html", context)
+    return render(request, "news/single-post.html", context)
 
 
 def homePageView(request):
-    news = News.published.all()
+    news_list = News.published.all().order_by("-published_time")[:5]
     category = Category.objects.all()
-    context = {"news": news, "category": category}
+    context = {"news_list": news_list, "category": category}
 
     return render(request, "news/home.html", context)
 
@@ -49,17 +49,6 @@ class ContactPageView(TemplateView):
 
 class ErrorPageView(TemplateView):
     template_name = "news/404-page.html"
-
-
-# def contactPageView(request):
-#     form = ContactForm(request.POST or None)
-#     if request.method == "POST" and form.is_valid():
-#         form.save()
-#         return HttpResponse("<h1>Thank you for message!</h1>")
-
-#     context = {"form": form}
-
-#     return render(request, "news/contact.html", context)
 
 
 def errorPageView(request):

@@ -4,7 +4,7 @@ from .models import News, Category, Contact
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
-    list_display = ["title", "slug", "published_time", "status"]
+    list_display = ["title", "slug", "published_time", "status", "category"]
     list_filter = ["status", "created_time", "published_time"]
     prepopulated_fields = {"slug": ("title",)}
     date_hierarchy = "published_time"

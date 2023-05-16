@@ -12,20 +12,14 @@
 
             <!-- ======= Single Post Content ======= -->
             <div class="single-post">
-              <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>Jul 5th
-                  '22</span></div>
-              <h1 class="mb-5">13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h1>
-              <p><span class="firstcharacter">L</span>orem ipsum dolor sit, amet consectetur adipisicing elit. Ratione
-                officia sed, suscipit distinctio, numquam omnis quo fuga ipsam quis inventore voluptatum recusandae
-                culpa, unde doloribus saepe labore alias voluptate expedita? Dicta delectus beatae explicabo odio
-                voluptatibus quas, saepe qui aperiam autem obcaecati, illo et! Incidunt voluptas culpa neque repellat
-                sint, accusamus beatae, cumque autem tempore quisquam quam eligendi harum debitis.</p>
-
+              <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span> <span>{{ news.published_time }}</span></div>
+              <h1 class="mb-5">{{ news.title }}</h1>
               <figure class="my-4">
-                <img src="assets/img/post-landscape-1.jpg" alt="" class="img-fluid">
-                <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit? </figcaption>
+                <img src="{{ news.image.url }}" alt="" class="img-fluid">
               </figure>
-              <p>Sunt reprehenderit, hic vel optio odit est dolore, distinctio iure itaque enim pariatur ducimus. Rerum
+              <p><span class="firstcharacter">L</span>{{ news.body }}</p>
+
+              {% comment %} <p>Sunt reprehenderit, hic vel optio odit est dolore, distinctio iure itaque enim pariatur ducimus. Rerum
                 soluta, perspiciatis voluptatum cupiditate praesentium repellendus quas expedita exercitationem tempora
                 aliquam quaerat in eligendi adipisci harum non omnis reprehenderit quidem beatae modi. Ea fugiat enim
                 libero, ipsam dicta explicabo nihil, tempore, nulla repellendus eos necessitatibus eligendi corporis
@@ -51,7 +45,7 @@
                 nihil accusantium, a dolorum quaerat tenetur illo eum culpa cum laudantium sunt doloremque modi possimus
                 magni? Perferendis cum repudiandae corrupti porro.</p>
               <figure class="my-4">
-                <img src="assets/img/post-landscape-5.jpg" alt="" class="img-fluid">
+                <img src="{% static 'images/post-landscape-5.jpg' %}" alt="" class="img-fluid">
                 <figcaption>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, odit? </figcaption>
               </figure>
               <p>Quis molestiae, dolorem consequuntur labore perferendis enim accusantium commodi optio, sequi magnam ad
@@ -69,7 +63,7 @@
                 doloribus, architecto perspiciatis sit consequatur pariatur alias animi expedita quas? Et doloribus
                 voluptatibus perferendis qui fugiat voluptatum autem facere aspernatur quidem quae assumenda iste, sit
                 similique, necessitatibus laborum magni. Ea, dolores!</p>
-              <p>Possimus temporibus rerum illo quia repudiandae provident sed quas atque. Ipsam adipisci accusamus iste
+              <p>Possimus temporibus rerum illo quia repudiandae provident sed quas atque. Ipsam adipisci accusamus iste {% endcomment %}
                 optio illo aliquam molestias? Voluptatibus, veniam recusandae facilis nobis perspiciatis rem similique,
                 nisi ad explicabo ipsa voluptatum, inventore molestiae natus adipisci? Fuga delectus quia assumenda
                 totam aspernatur. Nobis hic ea rem, quaerat voluptate vero illum laboriosam omnis aspernatur labore,
@@ -82,7 +76,7 @@
               <div class="comment d-flex mb-4">
                 <div class="flex-shrink-0">
                   <div class="avatar avatar-sm rounded-circle">
-                    <img class="avatar-img" src="assets/img/person-5.jpg" alt="" class="img-fluid">
+                    <img class="avatar-img" src="{% static 'images/person-5.jpg' %}" alt="" class="img-fluid">
                   </div>
                 </div>
                 <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -102,7 +96,7 @@
                     <div class="reply d-flex mb-4">
                       <div class="flex-shrink-0">
                         <div class="avatar avatar-sm rounded-circle">
-                          <img class="avatar-img" src="assets/img/person-4.jpg" alt="" class="img-fluid">
+                          <img class="avatar-img" src="{% static 'images/person-4.jpg' %}" alt="" class="img-fluid">
                         </div>
                       </div>
                       <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -118,7 +112,7 @@
                     <div class="reply d-flex">
                       <div class="flex-shrink-0">
                         <div class="avatar avatar-sm rounded-circle">
-                          <img class="avatar-img" src="assets/img/person-3.jpg" alt="" class="img-fluid">
+                          <img class="avatar-img" src="{% static 'images/person-3.jpg' %}" alt="" class="img-fluid">
                         </div>
                       </div>
                       <div class="flex-grow-1 ms-2 ms-sm-3">
@@ -138,7 +132,7 @@
               <div class="comment d-flex">
                 <div class="flex-shrink-0">
                   <div class="avatar avatar-sm rounded-circle">
-                    <img class="avatar-img" src="assets/img/person-2.jpg" alt="" class="img-fluid">
+                    <img class="avatar-img" src="{% static 'images/person-2.jpg' %}" alt="" class="img-fluid">
                   </div>
                 </div>
                 <div class="flex-shrink-1 ms-2 ms-sm-3">
@@ -367,7 +361,7 @@
               <div class="video-post">
                 <a href="https://www.youtube.com/watch?v=AiFfDjmd0jU" class="glightbox link-video">
                   <span class="bi-play-fill"></span>
-                  <img src="assets/img/post-landscape-5.jpg" alt="" class="img-fluid">
+                  <img src="{% static 'images/post-landscape-5.jpg' %}" alt="" class="img-fluid">
                 </a>
               </div>
             </div><!-- End Video -->

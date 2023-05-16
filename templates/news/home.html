@@ -13,53 +13,19 @@
         <div class="col-12">
           <div class="swiper sliderFeaturedPosts">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <a href="single-post.html" class="img-bg d-flex align-items-end"
-                  style="background-image: url('{% static "images/post-slide-1.jpg" %}');">
-                  <div class="img-bg-inner">
-                    <h2>The Best Homemade Masks for Face (keep the Pimples Away)</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                      minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                      repudiandae quidem necessitatibus rem atque.</p>
-                  </div>
-                </a>
-              </div>
 
+              {% for news in news_list %}
               <div class="swiper-slide">
-                <a href="single-post.html" class="img-bg d-flex align-items-end"
-                  style="background-image: url('{% static "images/post-slide-2.jpg" %}');">
+                <a href="{% url 'detail_page' news.pk %}" class="img-bg d-flex align-items-end"
+                  style="background-image: url('{{ news.image.url }}');">
                   <div class="img-bg-inner">
-                    <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                      minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                      repudiandae quidem necessitatibus rem atque.</p>
+                    <h2>{{ news.title | truncatewords:7 }}</h2>
+                    <p>{{ news.body | truncatewords:20 }}</p>
                   </div>
                 </a>
               </div>
+              {% endfor %}
 
-              <div class="swiper-slide">
-                <a href="single-post.html" class="img-bg d-flex align-items-end"
-                  style="background-image: url('{% static "images/post-slide-3.jpg" %}');">
-                  <div class="img-bg-inner">
-                    <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                      minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                      repudiandae quidem necessitatibus rem atque.</p>
-                  </div>
-                </a>
-              </div>
-
-              <div class="swiper-slide">
-                <a href="single-post.html" class="img-bg d-flex align-items-end"
-                  style="background-image: url('{% static "images/post-slide-4.jpg" %}');">
-                  <div class="img-bg-inner">
-                    <h2>9 Half-up/half-down Hairstyles for Long and Medium Hair</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae
-                      minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore
-                      repudiandae quidem necessitatibus rem atque.</p>
-                  </div>
-                </a>
-              </div>
             </div>
             <div class="custom-swiper-button-next">
               <span class="bi-chevron-right"></span>
@@ -150,14 +116,16 @@
               <div class="trending">
                 <h3>Trending</h3>
                 <ul class="trending-post">
+                  {% for news in news_list %}
                   <li>
                     <a href="single-post.html">
                       <span class="number">1</span>
-                      <h3>The Best Homemade Masks for Face (keep the Pimples Away)</h3>
-                      <span class="author">Jane Cooper</span>
+                      <h3>{{ news.title }}</h3>
+                      <span class="author">{{ news.published_time }}</span>
                     </a>
                   </li>
-                  <li>
+                  {% endfor %}
+                  {% comment %} <li>
                     <a href="single-post.html">
                       <span class="number">2</span>
                       <h3>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h3>
@@ -184,7 +152,7 @@
                       <h3>Life Insurance And Pregnancy: A Working Mom’s Guide</h3>
                       <span class="author">Jenny Wilson</span>
                     </a>
-                  </li>
+                  </li> {% endcomment %}
                 </ul>
               </div>
 
@@ -453,7 +421,7 @@
               Accusamus fugiat architecto rerum animi atque eveniet, quo, praesentium dignissimos</p>
 
             <div class="d-flex align-items-center author">
-              <div class="photo"><img src="{% static 'mg/person-7.jpg' %}i" alt="" class="img-fluid"></div>
+              <div class="photo"><img src="{% static 'images/person-7.jpg' %}i" alt="" class="img-fluid"></div>
               <div class="name">
                 <h3 class="m-0 p-0">Esther Howard</h3>
               </div>
