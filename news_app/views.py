@@ -14,15 +14,26 @@ def news_list(request):
 
 def detail_page(request, id):
     news = get_object_or_404(News, id=id, status=News.Status.Published)
-    context = {"news": news}
+    latest_news = News.published.all().order_by("-published_time")[:6]
+    categories = Category.objects.all()
+    first_letter = list(news.body)
+    news_body = news.body[1:]
+    context = {
+        "news": news,
+        "latest_news": latest_news,
+        "first_letter": first_letter[0],
+        "categories": categories,
+        "news_body": news_body,
+    }
 
     return render(request, "news/single-post.html", context)
 
 
 def homePageView(request):
     news_list = News.published.all().order_by("-published_time")[:5]
-    category = Category.objects.all()
-    context = {"news_list": news_list, "category": category}
+    categories = Category.objects.all()
+    numbers = 1
+    context = {"news_list": news_list, "categories": categories, "numbers": numbers}
 
     return render(request, "news/home.html", context)
 
