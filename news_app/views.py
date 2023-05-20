@@ -33,12 +33,14 @@ def homePageView(request):
     categories = Category.objects.all()
     news_list = News.published.all().order_by("-published_time")[:5]
     local_news = News.objects.all().filter(category__name="Mahalliy")
+    foreign_news = News.objects.all().filter(category__name="Xorijiy")
     numbers = 1
     context = {
         "news_list": news_list,
         "categories": categories,
         "numbers": numbers,
         "local_news": local_news,
+        "foreign_news": foreign_news,
     }
 
     return render(request, "news/home.html", context)
