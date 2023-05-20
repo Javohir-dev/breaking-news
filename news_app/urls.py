@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import news_list, detail_page, homePageView, ContactPageView, ErrorPageView
+from .views import news_list, detail_page, HomePageView, ContactPageView, ErrorPageView
 
 
 urlpatterns = [
-    path("", homePageView, name="home_page"),
+    # path("", homePageView, name="home_page"),
+    path("", HomePageView.as_view(), name="home_page"),
     path("news/", news_list, name="news_list_page"),
     path("news/<int:id>/", detail_page, name="detail_page"),
     path("contact/", ContactPageView.as_view(), name="contact_page"),

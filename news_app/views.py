@@ -1,6 +1,7 @@
+from typing import Any, Dict
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from .models import News, Category
 from .forms import ContactForm
 
@@ -44,6 +45,21 @@ def homePageView(request):
     }
 
     return render(request, "news/home.html", context)
+
+
+class HomePageView(ListView):
+    model = News
+    template_name = "news/home.html"
+    context_object_name = "news"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.model.objects.all()
+        context["news_list"] = News.published.all().order_by("-published_time")[:5]
+        context["local_news"] = News.objects.all().filter(category__name="Mahalliy")
+        context["foreign_news"] = News.objects.all().filter(category__name="Xorijiy")
+
+        return context
 
 
 class ContactPageView(TemplateView):
