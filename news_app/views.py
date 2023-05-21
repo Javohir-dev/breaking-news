@@ -30,21 +30,23 @@ def detail_page(request, id):
     return render(request, "news/single-post.html", context)
 
 
-def homePageView(request):
-    categories = Category.objects.all()
-    news_list = News.published.all().order_by("-published_time")[:5]
-    local_news = News.objects.all().filter(category__name="Mahalliy")
-    foreign_news = News.objects.all().filter(category__name="Xorijiy")
-    numbers = 1
-    context = {
-        "news_list": news_list,
-        "categories": categories,
-        "numbers": numbers,
-        "local_news": local_news,
-        "foreign_news": foreign_news,
-    }
+# def homePageView(request):
+#     categories = Category.objects.all()
+#     news_list = News.published.all().order_by("-published_time")[:5]
+#     local_news = News.objects.all().filter(category__name="Mahalliy")
+#     foreign_news = News.objects.all().filter(category__name="Xorijiy")
+#     techno_news = News.objects.all().filter(category__name="Texno")
+#     numbers = 1
+#     context = {
+#         "news_list": news_list,
+#         "categories": categories,
+#         "numbers": numbers,
+#         "local_news": local_news,
+#         "foreign_news": foreign_news,
+#         "techno_news": techno_news,
+#     }
 
-    return render(request, "news/home.html", context)
+#     return render(request, "news/home.html", context)
 
 
 class HomePageView(ListView):
@@ -56,8 +58,9 @@ class HomePageView(ListView):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
         context["news_list"] = News.published.all().order_by("-published_time")[:5]
-        context["local_news"] = News.objects.all().filter(category__name="Mahalliy")
-        context["foreign_news"] = News.objects.all().filter(category__name="Xorijiy")
+        context["local_news"] = News.published.all().filter(category__name="Mahalliy")
+        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["techno_news"] = News.published.all().filter(category__name="Texno")
 
         return context
 
