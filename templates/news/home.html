@@ -14,7 +14,7 @@
           <div class="swiper sliderFeaturedPosts">
             <div class="swiper-wrapper">
 
-              {% for news in news_list %}
+              {% for news in top_five %}
               <div class="swiper-slide">
                 <a href="{% url 'detail_page' news.pk %}" class="img-bg d-flex align-items-end"
                   style="background-image: url('{{ news.image.url }}');">
@@ -46,75 +46,93 @@
     <div class="container" data-aos="fade-up">
       <div class="row g-5">
         <div class="col-lg-4">
-          <div class="post-entry-1 lg">
-            <a href="single-post.html">
-              <img src="{% static 'images/post-landscape-1.jpg' %}" alt="" class="img-fluid" />
-            </a>
-            <div class="post-meta">
-              <span class="date">Culture</span>
-              <span class="mx-1">&bullet;</span>
-              <span>Jul 5th'22</span>
-            </div>
-            <h2>
-              <a href="single-post.html">11 Work From Home Part-Time Jobs You Can Do Now</a>
-            </h2>
-            <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero temporibus
-              repudiandae, inventore pariatur numquam cumque possimus exercitationem? Nihil tempore odit ab minus
-              eveniet praesentium, similique blanditiis molestiae ut saepe perspiciatis officia nemo, eos quae cumque.
-              Accusamus fugiat architecto rerum animi atque eveniet, quo, praesentium dignissimos</p>
+          {% for news in news_list %}
+            {% if forloop.counter == 6 %}
+              <div class="post-entry-1 lg">
+                <a href="{% url 'detail_page' news.pk %}">
+                  <img src="{{ news.image.url }}" alt="" class="img-fluid" />
+                </a>
+                <div class="post-meta">
+                  <span class="date">{{ news.category }}</span>
+                  <span class="mx-1">&bullet;</span>
+                  <span>{{ news.published_time }}</span>
+                </div>
+                <h2>
+                  <a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:7 }}</a>
+                </h2>
+                <p class="mb-4 d-block">{{ news.body | truncatewords:40 }}</p>
 
-            <div class="d-flex align-items-center author">
-              <div class="photo"><img src="{% static 'images/person-1.jpg' %}" alt="" class="img-fluid"></div>
-              <div class="name">
-                <h3 class="m-0 p-0">Cameron Williamson</h3>
+                <div class="d-flex align-items-center author">
+                  <div class="name">
+                    <h3 class="m-0 p-0">Views:10</h3>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            {% endif %}
+          {% endfor %}
+          <hr/>
+          {% for news in news_list %}
+            {% if forloop.counter > 12 and forloop.counter <= 13 %}
+              <div class="post-entry-1 lg">
+                <h2>
+                  <a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:5 }}</a>
+                </h2>
+                <div class="post-meta">
+                  <span class="date">{{ news.category }}</span>
+                  <span class="mx-1">&bullet;</span>
+                  <span>{{ news.published_time }}</span>
+                </div>
+                {% comment %} <p class="mb-4 d-block">{{ news.body | truncatewords:30 }}</p> {% endcomment %}
 
+                <div class="d-flex align-items-center author">
+                  <div class="name">
+                    <h3 class="m-0 p-0">Views:10</h3>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
 
         <div class="col-lg-8">
           <div class="row g-5">
             <div class="col-lg-4 border-start custom-border">
-              <div class="post-entry-1">
-                <a href="single-post.html"><img src="{% static 'images/post-landscape-2.jpg' %}" alt="" class="img-fluid"></a>
-                <div class="post-meta"><span class="date">Sport</span> <span class="mx-1">&bullet;</span> <span>Jul
-                    5th '22</span></div>
-                <h2><a href="single-post.html">Let’s Get Back to Work, New York</a></h2>
-              </div>
-              <div class="post-entry-1">
-                <a href="single-post.html"><img src="{% static 'images/post-landscape-5.jpg' %}" alt="" class="img-fluid"></a>
-                <div class="post-meta"><span class="date">Food</span> <span class="mx-1">&bullet;</span> <span>Jul
-                    17th '22</span></div>
-                <h2><a href="single-post.html">How to Avoid Distraction and Stay Focused During Video Calls?</a></h2>
-              </div>
-              <div class="post-entry-1">
-                <a href="single-post.html"><img src="{% static 'images/post-landscape-7.jpg' %}" alt="" class="img-fluid"></a>
-                <div class="post-meta"><span class="date">Design</span> <span class="mx-1">&bullet;</span> <span>Mar
-                    15th '22</span></div>
-                <h2><a href="single-post.html">Why Craigslist Tampa Is One of The Most Interesting Places On the
-                    Web?</a></h2>
-              </div>
+              {% for news in news_list %}
+                {% if forloop.counter > 6 and forloop.counter <= 9 %}
+                <div class="post-entry-1">
+                  <a href="{% url 'detail_page' news.pk %}">
+                    <img src="{{ news.image.url }}" alt="" class="img-fluid">
+                  </a>
+                  <div class="post-meta">
+                    <span class="date">{{ news.category }}</span>
+                    <span class="mx-1">&bullet;</span>
+                    <span>{{ news.published_time }}</span>
+                  </div>
+                  <h2>
+                    <a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a>
+                  </h2>
+                </div>
+                {% endif %}
+              {% endfor %}
             </div>
             <div class="col-lg-4 border-start custom-border">
-              <div class="post-entry-1">
-                <a href="single-post.html"><img src="{% static 'images/post-landscape-3.jpg' %}" alt="" class="img-fluid"></a>
-                <div class="post-meta"><span class="date">Business</span> <span class="mx-1">&bullet;</span> <span>Jul
-                    5th '22</span></div>
-                <h2><a href="single-post.html">6 Easy Steps To Create Your Own Cute Merch For Instagram</a></h2>
-              </div>
-              <div class="post-entry-1">
-                <a href="single-post.html"><img src="{% static 'images/post-landscape-6.jpg' %}" alt="" class="img-fluid"></a>
-                <div class="post-meta"><span class="date">Tech</span> <span class="mx-1">&bullet;</span> <span>Mar 1st
-                    '22</span></div>
-                <h2><a href="single-post.html">10 Life-Changing Hacks Every Working Mom Should Know</a></h2>
-              </div>
-              <div class="post-entry-1">
-                <a href="single-post.html"><img src="{% static 'images/post-landscape-8.jpg' %}" alt="" class="img-fluid"></a>
-                <div class="post-meta"><span class="date">Travel</span> <span class="mx-1">&bullet;</span> <span>Jul
-                    5th '22</span></div>
-                <h2><a href="single-post.html">5 Great Startup Tips for Female Founders</a></h2>
-              </div>
+              {% for news in news_list %}
+                {% if forloop.counter > 9 and forloop.counter <= 12 %}
+                <div class="post-entry-1">
+                  <a href="{% url 'detail_page' news.pk %}">
+                    <img src="{{ news.image.url }}" alt="" class="img-fluid">
+                  </a>
+                  <div class="post-meta">
+                    <span class="date">{{ news.category }}</span>
+                    <span class="mx-1">&bullet;</span>
+                    <span>{{ news.published_time }}</span>
+                  </div>
+                  <h2>
+                    <a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a>
+                  </h2>
+                </div>
+                {% endif %}
+              {% endfor %}
             </div>
 
             <!-- Trending Section -->
@@ -124,13 +142,15 @@
                 <h3>Trending</h3>
                 <ul class="trending-post">
                   {% for news in news_list %}
-                    <li>
-                      <a href="{% url 'detail_page' news.pk %}">
-                        <span class="number">{{ forloop.counter }}</span>
-                        <h3>{{ news.title }}</h3>
-                        <span class="author">{{ news.published_time }}</span>
-                      </a>
-                    </li>
+                    {% if forloop.counter <= 5 %}
+                      <li>
+                        <a href="{% url 'detail_page' news.pk %}">
+                          <span class="number">{{ forloop.counter }}</span>
+                          <h3>{{ news.title }}</h3>
+                          <span class="author">{{ news.published_time }}</span>
+                        </a>
+                      </li>
+                    {% endif %}
                   {% endfor %}
                 </ul>
               </div>
@@ -194,7 +214,7 @@
                   </div>
                   <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:13 }}</a></h2>
                   <p class="mb-4 d-block">{{ news.body | truncatewords:20 }}</p>
-                  <span class="author mb-3 d-block">View:10</span>
+                  <span class="author mb-3 d-block">Views:10</span>
                 </div>
                 {% endif %}
               {% endfor %}
@@ -240,7 +260,7 @@
         <div class="col-md-3">
           <div class="post-entry-1 border-bottom">
             {% for news in local_news %}
-              {% if forloop.counter <= 7 and forloop.counter > 1 %}
+              {% if forloop.counter <= 9 and forloop.counter > 1 %}
               <div class="post-meta">
                 <span class="date">{{ news.category }}</span>
                 <span class="mx-1">&bullet;</span>
@@ -249,7 +269,7 @@
               <h2 class="mb-2">
                 <a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a>
               </h2>
-              <span class="author mb-3 d-block">View:10</span>
+              <span class="author mb-3 d-block">Views:10</span>
               {% endif %}
             {% endfor %}
           </div>
@@ -284,7 +304,7 @@
                 <p>{{ news.body | truncatewords:30 }}</p>
                 <div class="d-flex align-items-center author">
                   <div class="name">
-                    <h3 class="m-0 p-0">View:10</h3>
+                    <h3 class="m-0 p-0">Views:10</h3>
                   </div>
                 </div>
               </div>
@@ -304,13 +324,13 @@
                     <span>{{ news.published_time }}</span>
                   </div>
                   <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:11 }}</a></h2>
-                  <span class="author mb-3 d-block">View:10</span>
-                  <p class="mb-4 d-block">{{ news.body | truncatewords:20 }}</p>
+                  <span class="author mb-3 d-block">Views:10</span>
+                  <p class="mb-4 d-block">{{ news.body | truncatewords:30 }}</p>
                 </div>
                 {% endif %}
               {% endfor %}
 
-              {% for news in foreign_news %}
+              {% comment %} {% for news in foreign_news %}
                 {% if forloop.counter == 9 %}
                 <div class="post-entry-1">
                   <div class="post-meta">
@@ -322,10 +342,10 @@
                   <span class="author mb-3 d-block">Views:10</span>
                 </div>
                 {% endif %}
-              {% endfor %}
+              {% endfor %} {% endcomment %}
             </div>
             {% for news in foreign_news %}
-              {% if forloop.counter == 10 %}
+              {% if forloop.counter == 9 %}
               <div class="col-lg-8">
                 <div class="post-entry-1">
                   <a href="{% url 'detail_page' news.pk %}">
@@ -396,7 +416,7 @@
 
             <div class="d-flex align-items-center author">
               <div class="name">
-                <h3 class="m-0 p-0">View:10</h3>
+                <h3 class="m-0 p-0">Views:10</h3>
               </div>
             </div>
             {% endif %}
@@ -413,7 +433,7 @@
               </div>
               <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a>
               </h2>
-              <span class="author mb-3 d-block">View:10</span>
+              <span class="author mb-3 d-block">Views:10</span>
             </div>
             {% endif %}
           {% endfor %}
@@ -457,7 +477,107 @@
                     <span>{{ news.published_time }}</span>
                   </div>
                   <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a></h2>
-                  <span class="author mb-3 d-block">View:10</span>
+                  <span class="author mb-3 d-block">Views:10</span>
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- End .row -->
+    </div>
+  </section><!-- End Lifestyle Category Section -->
+
+  <!-- ======= Lifestyle Category Section ======= -->
+  <section class="category-section">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header d-flex justify-content-between align-items-center mb-5">
+        <h2>Sport</h2>
+        <div><a href="category.html" class="more">See All Texnologiya</a></div>
+      </div>
+
+      <div class="row g-5">
+        <div class="col-lg-4">
+          <div class="post-entry-1 lg">
+          {% for news in sport_news %}
+            {% if forloop.first %}
+            <a href="{% url 'detail_page' news.pk %}">
+              <img src="{{ news.image.url }}" alt="" class="img-fluid">
+            </a>
+            <div class="post-meta">
+              <span class="date">{{ news.category }}</span>
+              <span class="mx-1">&bullet;</span>
+              <span>{{ news.published_time }}</span>
+            </div>
+            <h2><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a></h2>
+            <p class="mb-4 d-block">{{ news.body | truncatewords:30 }}</p>
+
+            <div class="d-flex align-items-center author">
+              <div class="name">
+                <h3 class="m-0 p-0">Views:10</h3>
+              </div>
+            </div>
+            {% endif %}
+          {% endfor %}
+          </div>
+
+          {% for news in sport_news %}
+            {% if forloop.counter > 1 and forloop.counter < 4 %}
+            <div class="post-entry-1 border-bottom">
+              <div class="post-meta">
+                <span class="date">{{ news.category }}</span>
+                <span class="mx-1">&bullet;</span>
+                <span>{{ news.published_time }}</span>
+              </div>
+              <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a>
+              </h2>
+              <span class="author mb-3 d-block">Views:10</span>
+            </div>
+            {% endif %}
+          {% endfor %}
+
+        </div>
+
+        <div class="col-lg-8">
+          <div class="row g-5">
+            <div class="col-lg-4 border-start custom-border">
+              {% for news in sport_news %}
+                {% if forloop.counter >= 4 and forloop.counter <= 6 %}
+                <div class="post-entry-1">
+                  <a href="{% url 'detail_page' news.pk %}"><img src="{{ news.image.url }}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
+                    <span>{{ news.published_time }}</span>
+                  </div>
+                  <h2><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a></h2>
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <div class="col-lg-4 border-start custom-border">
+              {% for news in sport_news %}
+                {% if forloop.counter > 6 and forloop.counter <= 9 %}
+                <div class="post-entry-1">
+                  <a href="{% url 'detail_page' news.pk %}"><img src="{{ news.image.url }}" alt="" class="img-fluid"></a>
+                  <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
+                    <span>{{ news.published_time }}</span>
+                  </div>
+                  <h2><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a></h2>
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <div class="col-lg-4">
+              {% for news in sport_news %}
+                {% if forloop.counter > 9 and forloop.counter <= 15 %} 
+                <div class="post-entry-1 border-bottom">
+                  <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
+                    <span>{{ news.published_time }}</span>
+                  </div>
+                  <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a></h2>
+                  <span class="author mb-3 d-block">Views:10</span>
                 </div>
                 {% endif %}
               {% endfor %}

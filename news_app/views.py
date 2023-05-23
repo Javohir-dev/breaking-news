@@ -16,15 +16,35 @@ def news_list(request):
 def detail_page(request, id):
     news = get_object_or_404(News, id=id, status=News.Status.Published)
     latest_news = News.published.all().order_by("-published_time")[:6]
+    foreign_news = News.objects.all().filter(category__name="Xorijiy")
+    local_news = News.objects.all().filter(category__name="Mahalliy")
+    this_news = News.objects.all().filter(category__name=f"{news.category}")
     categories = Category.objects.all()
     first_letter = news.body[:1]
     news_body = news.body[1:]
+    # Bu shartlar sahifadagi tavsiya bo'limidagi ma'lumotlar asosiy ko'rinib turgan ma'lumotlar bilan
+    # bir-hil bo'lib qolmasligi uchun hizmat qilad.
+    if news.category == foreign_news[0].category:
+        second_news = News.objects.all().filter(category__name="Sport")
+    else:
+        second_news = News.objects.all().filter(category__name="Xorijiy")
+
+    if news.category == local_news[0].category:
+        third_news = News.objects.all().filter(category__name="Texno")
+    else:
+        third_news = News.objects.all().filter(category__name="Mahalliy")
+
     context = {
         "news": news,
         "latest_news": latest_news,
         "first_letter": first_letter,
         "categories": categories,
         "news_body": news_body,
+        "this_news": this_news,
+        "second_news": second_news,
+        "second_news_category": second_news[0].category,
+        "third_news": third_news,
+        "third_news_category": third_news[0].category,
     }
 
     return render(request, "news/single-post.html", context)
@@ -57,10 +77,12 @@ class HomePageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
-        context["news_list"] = News.published.all().order_by("-published_time")[:5]
+        context["top_five"] = News.published.all().order_by("-published_time")[:5]
+        context["news_list"] = News.published.all().order_by("-published_time")[5:]
         context["local_news"] = News.published.all().filter(category__name="Mahalliy")
         context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["sport_news"] = News.published.all().filter(category__name="Sport")
 
         return context
 
