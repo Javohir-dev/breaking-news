@@ -15,8 +15,8 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="{% static '' %}images/favicon.png" rel="icon">
-  <link href="{% static '' %}images/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{% static 'images/favicon.png' %}" rel="icon">
+  <link href="{% static 'images/apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,28 +52,37 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{% url 'home_page' %}">Home</a></li>
-          <li><a href="single-post.html">Single Post</a></li>
-          <li class="dropdown"><a href="category.html"><span>Categories</span> <i
-                class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="{% url 'local_news_page' %}">Mahalliy</a></li>
+          <li><a href="{% url 'texno_news_page' %}">Texno</a></li>
+          <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
+          <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
+          <li><a href="{% url '404_page' %}">About</a></li>
+          <li><a href="{% url 'contact_page' %}">Contact</a></li>
+          <li><a href="{% url '404_page' %}">404-page</a></li>
+          <li><a href="{% url '404_page' %}">LogIn</a></li>
+          <li><a href="{% url '404_page' %}">Sign-Up</a></li>
+          {% comment %} <li class="dropdown">
+            <a href="{% url 'local_news_page' %}">
+              <span>Categories</span>
+              <i class="bi bi-chevron-down dropdown-indicator"></i>
+            </a>
             <ul>
-              <li><a href="search-result.html">Search Result</a></li>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                    class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <li><a href="{% url 'local_news_page' %}">Search Result</a></li>
+              <li><a href="{% url 'local_news_page' %}">Drop Down 1</a></li>
+              <li class="dropdown">
+                <a href="{% url 'local_news_page' %}">
+                  <span>Deep Drop Down</span>
+                  <i class="bi bi-chevron-down dropdown-indicator"></i>
+                </a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li>
+                    <a href="{% url 'local_news_page' %}">Deep Drop Down 1</a>
+                  </li>
 
                 </ul>
               </li>
             </ul>
-          </li>
-
-          <li><a href="about.html">About</a></li>
-          <li><a href="{% url 'contact_page' %}">Contact</a></li>
-          <li><a href="./login.html">LogIn</a></li>
-          <li><a href="./signup.html">Sign-Up</a></li>
-          <li><a href="{% url '404_page' %}">404-page</a></li>
+          </li> {% endcomment %}
         </ul>
       </nav><!-- .navbar -->
 

@@ -1,4 +1,5 @@
 from typing import Any, Dict
+from django.db.models.query import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
@@ -13,8 +14,8 @@ def news_list(request):
     return render(request, "news/news_list.html", context)
 
 
-def detail_page(request, id):
-    news = get_object_or_404(News, id=id, status=News.Status.Published)
+def detail_page(request, news):
+    news = get_object_or_404(News, slug=news, status=News.Status.Published)
     latest_news = News.published.all().order_by("-published_time")[:6]
     foreign_news = News.objects.all().filter(category__name="Xorijiy")
     local_news = News.objects.all().filter(category__name="Mahalliy")
@@ -115,3 +116,47 @@ def errorPageView(request):
     context = {}
 
     return render(request, "news/404-page.html", context)
+
+
+class LocalNewsListView(ListView):
+    model = News
+    template_name = "news/local-news-list.html"
+    context_object_name = "local_news"
+
+    def get_queryset(self):
+        news = self.model.published.all().filter(category__name="Mahalliy")
+
+        return news
+
+
+class ForeignNewsListView(ListView):
+    model = News
+    template_name = "news/foreign-news-list.html"
+    context_object_name = "foreign_news"
+
+    def get_queryset(self):
+        news = self.model.published.all().filter(category__name="Xorijiy")
+
+        return news
+
+
+class TechnoNewsListView(ListView):
+    model = News
+    template_name = "news/techno-news-list.html"
+    context_object_name = "techno_news"
+
+    def get_queryset(self):
+        news = self.model.published.all().filter(category__name="Texno")
+
+        return news
+
+
+class SportNewsListView(ListView):
+    model = News
+    template_name = "news/sport-news-list.html"
+    context_object_name = "sport_news"
+
+    def get_queryset(self):
+        news = self.model.published.all().filter(category__name="Sport")
+
+        return news

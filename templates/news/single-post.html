@@ -158,7 +158,7 @@
                       <div class="post-meta">
                         <span class="date">{{ news.category }}</span>
                       </div>
-                      <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:10 }}</a></h2>
+                      <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:10 }}</a></h2>
                       <span class="author mb-3 d-block">{{ news.published_time }}</span>
                     </div>
                   {% endfor %}
@@ -172,7 +172,7 @@
                       <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
                         <span>{{ news.published_time }}</span>
                       </div>
-                      <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:13 }}</a></h2>
+                      <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
                       <span class="author mb-3 d-block">Views:10</span>
                     </div>
                   {% endif %}
@@ -188,7 +188,7 @@
                       <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
                         <span>{{ news.published_time }}</span>
                       </div>
-                      <h2 class="mb-2"><a href="{% url 'detail_page' news.pk %}">{{ news.title | truncatewords:13 }}</a></h2>
+                      <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
                       <span class="author mb-3 d-block">Views:10</span>
                     </div>
                   {% endif %}
