@@ -8,6 +8,11 @@ class PublishedManager(models.Manager):
         return super().get_queryset().filter(status=News.Status.Published)
 
 
+class AboutUsManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=News.Status.AboutUs)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=150)
 
@@ -24,6 +29,7 @@ class News(models.Model):
     class Status(models.TextChoices):
         Draft = "DF", "Draft"
         Published = "PB", "Published"
+        AboutUs = "Au", "AboutUs"
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
@@ -39,6 +45,7 @@ class News(models.Model):
 
     objects = models.Manager()  # defauld manager
     published = PublishedManager()
+    about_us = AboutUsManager()
 
     class Meta:
         ordering = ["-published_time"]

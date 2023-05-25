@@ -14,6 +14,19 @@ def news_list(request):
     return render(request, "news/news_list.html", context)
 
 
+class AboutView(ListView):
+    model = News
+    template_name = "news/about.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        # Add in a QuerySet of all the News
+        context["our_news"] = News.about_us.all().order_by("-published_time")
+
+        return context
+
+
 def detail_page(request, news):
     news = get_object_or_404(News, slug=news, status=News.Status.Published)
     latest_news = News.published.all().order_by("-published_time")[:6]
@@ -81,9 +94,12 @@ class HomePageView(ListView):
         context["top_five"] = News.published.all().order_by("-published_time")[:5]
         context["news_list"] = News.published.all().order_by("-published_time")[5:]
         context["local_news"] = News.published.all().filter(category__name="Mahalliy")
-        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
         context["sport_news"] = News.published.all().filter(category__name="Sport")
+        context["local_news_category"] = "Mahalliy"
+        context["sport_news_category"] = "Sport"
+        context["techno_news_category"] = "Texno"
 
         return context
 
@@ -123,6 +139,18 @@ class LocalNewsListView(ListView):
     template_name = "news/local-news-list.html"
     context_object_name = "local_news"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["sport_news"] = News.published.all().filter(category__name="Sport")
+        context["categories"] = Category.objects.all()
+        context["local_news_category"] = "Mahalliy"
+        context["sport_news_category"] = "Sport"
+        context["techno_news_category"] = "Texno"
+
+        return context
+
     def get_queryset(self):
         news = self.model.published.all().filter(category__name="Mahalliy")
 
@@ -133,6 +161,18 @@ class ForeignNewsListView(ListView):
     model = News
     template_name = "news/foreign-news-list.html"
     context_object_name = "foreign_news"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["sport_news"] = News.published.all().filter(category__name="Sport")
+        context["categories"] = Category.objects.all()
+        context["local_news_category"] = "Mahalliy"
+        context["sport_news_category"] = "Sport"
+        context["techno_news_category"] = "Texno"
+
+        return context
 
     def get_queryset(self):
         news = self.model.published.all().filter(category__name="Xorijiy")
@@ -145,6 +185,18 @@ class TechnoNewsListView(ListView):
     template_name = "news/techno-news-list.html"
     context_object_name = "techno_news"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["sport_news"] = News.published.all().filter(category__name="Sport")
+        context["categories"] = Category.objects.all()
+        context["local_news_category"] = "Mahalliy"
+        context["sport_news_category"] = "Sport"
+        context["techno_news_category"] = "Texno"
+
+        return context
+
     def get_queryset(self):
         news = self.model.published.all().filter(category__name="Texno")
 
@@ -155,6 +207,18 @@ class SportNewsListView(ListView):
     model = News
     template_name = "news/sport-news-list.html"
     context_object_name = "sport_news"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["sport_news"] = News.published.all().filter(category__name="Sport")
+        context["categories"] = Category.objects.all()
+        context["local_news_category"] = "Mahalliy"
+        context["sport_news_category"] = "Sport"
+        context["techno_news_category"] = "Texno"
+
+        return context
 
     def get_queryset(self):
         news = self.model.published.all().filter(category__name="Sport")
