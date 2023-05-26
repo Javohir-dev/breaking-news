@@ -22,7 +22,7 @@ class AboutView(ListView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the News
-        context["our_news"] = News.about_us.all().order_by("-published_time")
+        context["our_news"] = News.published.all().filter(category__name="about")
 
         return context
 
@@ -91,7 +91,11 @@ class HomePageView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
-        context["top_five"] = News.published.all().order_by("-published_time")[:5]
+        context["top_five"] = (
+            News.published.all()
+            .order_by("-published_time")
+            .filter(category__name="Texno")[:5]
+        )
         context["news_list"] = News.published.all().order_by("-published_time")[5:]
         context["local_news"] = News.published.all().filter(category__name="Mahalliy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")

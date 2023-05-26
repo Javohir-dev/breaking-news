@@ -9,6 +9,7 @@ from .views import (
     ForeignNewsListView,
     TechnoNewsListView,
     SportNewsListView,
+    AboutView,
 )
 
 
@@ -23,4 +24,5 @@ urlpatterns = [
     path("foreign/", ForeignNewsListView.as_view(), name="foreign_news_page"),
     path("texno/", TechnoNewsListView.as_view(), name="texno_news_page"),
     path("sport/", SportNewsListView.as_view(), name="sport_news_page"),
+    path("about-us/", AboutView.as_view(), name="about_page"),
 ]

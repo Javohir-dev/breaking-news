@@ -1,4 +1,5 @@
 There are all step of this project.
 
 Texno_news doesn't found! = Fixed
-About us qismini templatega ulashim kerak
+About us qismini templatega ulashim kerak = Done
+Xodimlar uchun model yozib AboutUs page-ga ulash kerak
