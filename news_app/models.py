@@ -8,6 +8,11 @@ class PublishedManager(models.Manager):
         return super().get_queryset().filter(status=News.Status.Published)
 
 
+class ActivedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Staff.Status.Active)
+
+
 class Category(models.Model):
     name = models.CharField(max_length=150)
 
@@ -24,7 +29,6 @@ class News(models.Model):
     class Status(models.TextChoices):
         Draft = "DF", "Draft"
         Published = "PB", "Published"
-        AboutUs = "Au", "AboutUs"
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
@@ -49,6 +53,37 @@ class News(models.Model):
 
     def get_absolute_url(self):
         return reverse("detail_page", args=[self.slug])
+
+
+class Occupation(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Staff(models.Model):
+    class Status(models.TextChoices):
+        Active = "AT", "Active"
+        Disable = "DS", "Disable"
+
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    staff_info = models.TextField()
+    image = models.ImageField(upload_to="staff/images")
+    occupation = models.ForeignKey(Occupation, on_delete=models.CASCADE)
+    status = models.CharField(
+        max_length=2, choices=Status.choices, default=Status.Active
+    )
+
+    objects = models.Manager()  # defauld manager
+    active = ActivedManager()
+
+    # class Meta:
+    #     ordering = ["-published_time"]
+
+    def __str__(self):
+        return self.first_name
 
 
 class Contact(models.Model):

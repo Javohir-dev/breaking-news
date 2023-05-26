@@ -1,0 +1,36 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Staff page {% endblock title %}
+{% block content %}
+  <main id="main">
+
+    <section>
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <div class="row justify-content-center">
+              <div class="col-lg-6">
+                <h2 class="display-4">Our Team</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil sint sed, fugit distinctio ad eius
+                  itaque deserunt doloribus harum excepturi laudantium sit officiis et eaque blanditiis. Dolore natus
+                  excepturi recusandae.</p>
+              </div>
+            </div>
+          </div>
+
+          {% for person in staff_list %}
+            <div class="col-lg-4 text-center mb-5">
+              <img src="{{ person.image.url }}" alt="" class="img-fluid rounded-circle w-50 mb-4">
+              <h4>{{ person.first_name }} {{ person.last_name }}</h4>
+              <span class="d-block mb-3 text-uppercase">{{ person.occupation }}</span>
+              <p>{{ person.staff_info }}</p>
+            </div>
+          {% endfor %}
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+{% endblock content %}

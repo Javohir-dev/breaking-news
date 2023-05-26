@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView, ListView
-from .models import News, Category
+from .models import News, Category, Occupation, Staff
 from .forms import ContactForm
 
 
@@ -64,25 +64,6 @@ def detail_page(request, news):
     return render(request, "news/single-post.html", context)
 
 
-# def homePageView(request):
-#     categories = Category.objects.all()
-#     news_list = News.published.all().order_by("-published_time")[:5]
-#     local_news = News.objects.all().filter(category__name="Mahalliy")
-#     foreign_news = News.objects.all().filter(category__name="Xorijiy")
-#     techno_news = News.objects.all().filter(category__name="Texno")
-#     numbers = 1
-#     context = {
-#         "news_list": news_list,
-#         "categories": categories,
-#         "numbers": numbers,
-#         "local_news": local_news,
-#         "foreign_news": foreign_news,
-#         "techno_news": techno_news,
-#     }
-
-#     return render(request, "news/home.html", context)
-
-
 class HomePageView(ListView):
     model = News
     template_name = "news/home.html"
@@ -104,6 +85,19 @@ class HomePageView(ListView):
         context["local_news_category"] = "Mahalliy"
         context["sport_news_category"] = "Sport"
         context["techno_news_category"] = "Texno"
+
+        return context
+
+
+class StaffPageView(ListView):
+    model = Staff
+    template_name = "news/staff.html"
+    context_object_name = "staff"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["occupations"] = Occupation.objects.all()
+        context["staff_list"] = Staff.active.all()
 
         return context
 
