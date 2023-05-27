@@ -1,0 +1,62 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} {{ news.title }} {% endblock title %}
+{% block content %}
+
+<main id="main">
+  <section id="contact" class="contact mb-5">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="col-lg-12 text-center mb-5">
+          <h1 class="page-title">Change the news</h1>
+        </div>
+      </div>
+
+      <div class="row gy-4">
+        <div class="card" style="width: 100%;">
+          <img src="{{ news.image.url }}" class="card-img-top pt-3" alt="NOt found">
+          <div class="card-body">
+            <h5 class="card-title">{{ news.title }}</h5>
+            <p class="card-text">{{ news.body | truncatewords:40 }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form mt-5">
+        <form action="#" method="post" role="form" class="php-email-form">{% csrf_token %}
+          <div class="row">
+            <div class="form-group col">
+              <label for="name" class="form-label">Title</label>
+              <input type="text" name="title" class="form-control" id="name" placeholder="Title" value="{{ news.title }}" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="body" class="form-label">Body</label>
+            <textarea class="form-control" name="body" id="body" rows="5" placeholder="Message" required>{{ news.body }}</textarea>
+          </div>
+          <div class="form-group">
+            <input type="file" name="image" class="form-control" id="name" placeholder="Title"required>
+          </div>
+          <div class="form-group">
+            <select name="category" required="" id="id_category" class="form-select form-select-sm">
+              {% for option in categories %}
+                {% if option == news.category %}
+                  <option value="{{ forloop.counter }}" selected="">{{ option }}</option>
+                {% else %}
+                  <option value="{{ forloop.counter }}">{{ option }}</option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+          <div class="text-center">
+            <button type="submit">Save the change</button>
+          </div>
+        </form>
+      </div><!-- End Contact Form -->
+    </div>
+  </section>
+
+</main>
+    
+{% endblock content %}

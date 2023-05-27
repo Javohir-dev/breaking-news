@@ -2,7 +2,14 @@ from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    TemplateView,
+    ListView,
+    UpdateView,
+    CreateView,
+    DeleteView,
+)
 from .models import News, Category, Occupation, Staff
 from .forms import ContactForm
 
@@ -222,3 +229,15 @@ class SportNewsListView(ListView):
         news = self.model.published.all().filter(category__name="Sport")
 
         return news
+
+
+class NewsUpdateView(UpdateView):
+    model = News
+    fields = ["title", "body", "image", "category"]
+    template_name = "crud/news-edit.html"
+
+
+class NewsDeleteView(DeleteView):
+    model = News
+    template_name = "crud/news-delete.html"
+    success_url = reverse_lazy("home_page")

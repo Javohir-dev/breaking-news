@@ -11,6 +11,8 @@ from .views import (
     SportNewsListView,
     AboutView,
     StaffPageView,
+    NewsDeleteView,
+    NewsUpdateView,
 )
 
 
@@ -27,4 +29,6 @@ urlpatterns = [
     path("sport/", SportNewsListView.as_view(), name="sport_news_page"),
     path("about-us/", AboutView.as_view(), name="about_page"),
     path("staff/", StaffPageView.as_view(), name="staff_page"),
+    path("news/<slug>/delete", NewsDeleteView.as_view(), name="news_delete_page"),
+    path("news/<slug>/edit", NewsUpdateView.as_view(), name="news_edit_page"),
 ]
