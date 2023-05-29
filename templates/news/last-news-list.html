@@ -1,0 +1,181 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Oxirgi yangiliklari {% endblock title %}
+{% block content %}
+
+<main id="main">
+    <section>
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-9" data-aos="fade-up">
+            <h3 class="category-title">Category: Texno</h3>
+            {% for news in last_news %}
+            <div class="d-md-flex post-entry-2 half">
+              <a href="{{ news.get_absolute_url }}" class="me-4 thumbnail">
+                <img src="{{ news.image.url }}" alt="" class="img-fluid">
+              </a>
+              <div>
+                <div class="post-meta">
+                  <span class="date">{{ news.category }}</span>
+                  <span class="mx-1">&bullet;</span>
+                  <span>{{ news.published_time }}</span>
+                </div>
+                <h3>
+                  <a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:10}}</a>
+                </h3>
+                <p>{{ news.body | truncatewords:30 }}</p>
+                <div class="d-flex align-items-center author">
+                  <div class="name">
+                    <h3 class="m-0 p-0">Views:10</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+            {% comment %} <div class="text-start py-4">
+              <div class="custom-pagination">
+                <a href="#" class="prev">Prevous</a>
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#" class="next">Next</a>
+              </div>
+            </div> {% endcomment %}
+          </div>
+
+          <div class="col-md-3">
+            <!-- ======= Sidebar ======= -->
+            <div class="aside-block">
+
+              <ul class="nav nav-pills custom-tab-nav mb-4" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="pills-popular-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-popular"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-popular"
+                    aria-selected="true">
+                    {{ techno_news_category }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="pills-trending-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-trending"
+                    type="button"
+                    role="tab"
+                    aria-controls="pills-trending"
+                    aria-selected="false">
+                    {{ local_news_category }}
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link" 
+                    d="pills-latest-tab"
+                    data-bs-toggle="pill"
+                    data-bs-target="#pills-latest"
+                    type="button" role="tab"
+                    aria-controls="pills-latest"
+                    aria-selected="false">
+                    {{ sport_news_category }}
+                  </button>
+                </li>
+              </ul>
+
+              <div class="tab-content" id="pills-tabContent">
+
+                <!-- Popular -->
+                <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
+                  {% for news in techno_news %}
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta">
+                        <span class="date">{{ news.category }}</span>
+                      </div>
+                      <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:10 }}</a></h2>
+                      <span class="author mb-3 d-block">{{ news.published_time }}</span>
+                    </div>
+                  {% endfor %}
+                </div> <!-- End Popular -->
+
+                <!-- Trending -->
+                <div class="tab-pane fade" id="pills-trending" role="tabpanel" aria-labelledby="pills-trending-tab">
+                {% for news in local_news %}
+                  {% if forloop.counter  <= 6%}
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
+                        <span>{{ news.published_time }}</span>
+                      </div>
+                      <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
+                      <span class="author mb-3 d-block">Views:10</span>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+
+                </div> <!-- End Trending -->
+
+                <!-- Latest -->
+                <div class="tab-pane fade" id="pills-latest" role="tabpanel" aria-labelledby="pills-latest-tab">
+                {% for news in sport_news %}
+                  {% if forloop.counter  <= 6%}
+                    <div class="post-entry-1 border-bottom">
+                      <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
+                        <span>{{ news.published_time }}</span>
+                      </div>
+                      <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
+                      <span class="author mb-3 d-block">Views:10</span>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+                </div> <!-- End Latest -->
+
+              </div>
+            </div>
+
+            <div class="aside-block">
+              <h3 class="aside-title">Video</h3>
+              <div class="video-post">
+                <a href="https://www.youtube.com/embed/Wlp2K9o9Obk" class="glightbox link-video">
+                  <span class="bi-play-fill"></span>
+                  <img src="{% static 'images/post-landscape-5.jpg' %}" alt="" class="img-fluid">
+                </a>
+              </div>
+            </div><!-- End Video -->
+
+            <div class="aside-block">
+              <h3 class="aside-title">Categories</h3>
+              <ul class="aside-links list-unstyled">
+                {% for category in categories %}
+                <li>
+                  <a href="category.html"><i class="bi bi-chevron-right"></i> {{ category.name }}</a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div><!-- End Categories -->
+
+            <div class="aside-block">
+              <h3 class="aside-title">Tags</h3>
+              <ul class="aside-tags list-unstyled">
+                {% for category in categories %}
+                <li><a href="category.html">{{ category.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div><!-- End Tags -->
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+{% endblock content %}

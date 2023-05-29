@@ -32,7 +32,7 @@ class News(models.Model):
         Published = "PB", "Published"
 
     title = models.CharField(max_length=250)
-    slug = models.SlugField(max_length=250)
+    slug = models.SlugField(max_length=300)
     body = models.TextField()
     image = models.ImageField(upload_to="news/images")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

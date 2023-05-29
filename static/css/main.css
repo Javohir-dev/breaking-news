@@ -1298,3 +1298,36 @@ section {
 .footer .credits a {
   color: var(--color-white);
 }
+
+/* ====news-create====== */
+.custom_form {
+  margin-top: 8rem;
+  margin-bottom: 8rem;
+  box-shadow: 0 0 30px rgba(var(--color-black-rgb), 0.1);
+  padding: 30px;
+  background: #fff;
+}
+
+.custom_form p>input {
+  width: 100%;
+  border: 1px solid #ced4da;
+}
+
+.custom_form p>label {
+  margin-bottom: 0.5rem;
+}
+
+.custom_form p>select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #ced4da;
+}
+
+.custom_form p>textarea {
+  width: 100%;
+  border: 1px solid #ced4da;
+  padding: 10px 14px;
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 15px;
+}

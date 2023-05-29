@@ -52,10 +52,18 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{% url 'local_news_page' %}">Mahalliy</a></li>
-          <li><a href="{% url 'texno_news_page' %}">Texno</a></li>
-          <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
-          <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
+          <li class="dropdown">
+            <a href="{% url 'last_news_page' %}">
+              <span>Categories</span>
+              <i class="bi bi-chevron-down dropdown-indicator"></i>
+            </a>
+            <ul>
+              <li><a href="{% url 'local_news_page' %}">Mahalliy</a></li>
+              <li><a href="{% url 'texno_news_page' %}">Texno</a></li>
+              <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
+              <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
+            </ul>
+          </li>
           <li><a href="{% url 'about_page' %}">About</a></li>
           <li><a href="{% url 'staff_page' %}">Staff</a></li>
           <li><a href="{% url 'contact_page' %}">Contact</a></li>
@@ -66,28 +74,6 @@
             <a href="{% url 'news_create_page' %}" type="submit" class="btn btn-secondary btn-sm px-3 py-2 ml-3" style="margin-left: 0.8rem;">Create</a>
           </li>
           
-          {% comment %} <li class="dropdown">
-            <a href="{% url 'local_news_page' %}">
-              <span>Categories</span>
-              <i class="bi bi-chevron-down dropdown-indicator"></i>
-            </a>
-            <ul>
-              <li><a href="{% url 'local_news_page' %}">Search Result</a></li>
-              <li><a href="{% url 'local_news_page' %}">Drop Down 1</a></li>
-              <li class="dropdown">
-                <a href="{% url 'local_news_page' %}">
-                  <span>Deep Drop Down</span>
-                  <i class="bi bi-chevron-down dropdown-indicator"></i>
-                </a>
-                <ul>
-                  <li>
-                    <a href="{% url 'local_news_page' %}">Deep Drop Down 1</a>
-                  </li>
-
-                </ul>
-              </li>
-            </ul>
-          </li> {% endcomment %}
         </ul>
       </nav><!-- .navbar -->
 

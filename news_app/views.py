@@ -3,7 +3,9 @@ from django.db.models.query import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
+from django.forms import ModelForm
 from django.views.generic import (
+    View,
     TemplateView,
     ListView,
     UpdateView,
@@ -11,7 +13,7 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import News, Category, Occupation, Staff
-from .forms import ContactForm
+from .forms import ContactForm, NewsCreateForm
 
 
 def news_list(request):
@@ -208,6 +210,29 @@ class TechnoNewsListView(ListView):
         return news
 
 
+class LastNewsListView(ListView):
+    model = News
+    template_name = "news/last-news-list.html"
+    context_object_name = "last_news"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["sport_news"] = News.published.all().filter(category__name="Sport")
+        context["categories"] = Category.objects.all()
+        context["local_news_category"] = "Mahalliy"
+        context["sport_news_category"] = "Sport"
+        context["techno_news_category"] = "Texno"
+
+        return context
+
+    def get_queryset(self):
+        news = self.model.published.all().order_by("-published_time")[:10]
+
+        return news
+
+
 class SportNewsListView(ListView):
     model = News
     template_name = "news/sport-news-list.html"
@@ -246,5 +271,27 @@ class NewsDeleteView(DeleteView):
 class NewsCreateView(CreateView):
     model = News
     template_name = "crud/news-create.html"
-    fields = ("title", "body", "image", "category", "status")
-    success_url = reverse_lazy("home_page")
+    fields = ["title", "body", "image", "category", "status"]
+    # success_url = reverse_lazy("home_page")
+
+
+# class NewsCreateView(View):
+#     def get(self, request):
+#         form = News.objects.all()
+#         return render(request, "crud/news-create.html", {"form": form})
+
+#     def post(self, request):
+#         title = request.POST["title"]
+#         body = request.POST["body"]
+#         image = request.POST["image"]
+#         category = request.POST["category"]
+#         status = request.POST["status"]
+
+#         news = News.objects.create(
+#             title=title,
+#             body=body,
+#             image=image,
+#             category=category,
+#             status=status,
+#         )
+#         news.save()
