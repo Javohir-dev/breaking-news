@@ -62,6 +62,10 @@
           <li><a href="{% url '404_page' %}">404-page</a></li>
           <li><a href="{% url '404_page' %}">LogIn</a></li>
           <li><a href="{% url '404_page' %}">Sign-Up</a></li>
+          <li>
+            <a href="{% url 'news_create_page' %}" type="submit" class="btn btn-secondary btn-sm px-3 py-2 ml-3" style="margin-left: 0.8rem;">Create</a>
+          </li>
+          
           {% comment %} <li class="dropdown">
             <a href="{% url 'local_news_page' %}">
               <span>Categories</span>
@@ -141,7 +145,7 @@
             <h3 class="footer-heading">Categories</h3>
             <ul class="footer-links list-unstyled">
               {% for category in categories %}
-              <li><a href="category.html"><i class="bi bi-chevron-right"></i>{{ category.name }}</a></li>
+                <li><a href="category.html"><i class="bi bi-chevron-right"></i>{{ category.name }}</a></li>
               {% endfor %}
             </ul>
           </div>

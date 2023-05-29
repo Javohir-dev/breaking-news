@@ -1,6 +1,7 @@
 from django.urls import reverse
 from django.utils import timezone
 from django.db import models
+from django.utils.text import slugify
 
 
 class PublishedManager(models.Manager):
@@ -37,6 +38,13 @@ class News(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     published_time = models.DateTimeField(default=timezone.now)
     created_time = models.DateTimeField(auto_now_add=True)
+
+    def save(self, *args, **kwargs):
+        # Slugni titledan yaratib olish
+        self.slug = slugify(self.title)
+
+        super().save(*args, **kwargs)
+
     updated_time = models.DateTimeField(auto_now=True)
     status = models.CharField(
         max_length=2, choices=Status.choices, default=Status.Draft
