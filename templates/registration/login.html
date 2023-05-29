@@ -1,0 +1,50 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} LogIn page {% endblock title %}
+{% block content %}
+
+<section class="main_login">
+{% comment %} <form method="post" name="signin" class="form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary" >
+            login
+    </button>
+</form> {% endcomment %}
+	<main class="main login ">
+		<div class="container">
+			<section class="wrapper">
+				<div class="heading">
+					<h1 class="text text-large">LogIn</h1>
+					<p class="text text-normal">
+						New user?
+						<span>
+							<a href="./signup.html" class="text text-links">Create an account</a>
+						</span>
+					</p>
+				</div>
+				<form method="post" name="signin" class="form">{% csrf_token %}
+					<div class="input-control">
+						<label for="username" class="input-label" hidden>User name</label>
+						<input type="username" name="username" id="username" class="input-field" placeholder="Username Address">
+					</div>
+					<div class="input-control">
+						<label for="password" class="input-label" hidden>Password</label>
+						<input type="password" name="password" id="password" class="input-field" placeholder="Password">
+					</div>
+					<div class="input-control">
+						<a href="#" class="text text-links">Forgot Password</a>
+						<button type="submit" name="submit" class="input-submit login-bg-blue">Sign In</button>
+					</div>
+					<div class="d-flex flex-column">
+						<a href="#!" type="submit" name="submit" class="input-submit login-bg-red my-2 text-center">
+							password recovery
+						</a>
+					</div>
+				</form>
+			</section>
+		</div>
+		</div>
+	</main>
+</section>
+{% endblock content %}

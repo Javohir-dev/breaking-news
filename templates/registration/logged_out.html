@@ -1,0 +1,37 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} LogOut page {% endblock title %}
+{% block content %}
+
+<section class="main_login">
+{% comment %} <form method="post" name="signin" class="form">{% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary" >
+            login
+    </button>
+</form> {% endcomment %}
+	<main class="main login ">
+		<div class="container">
+			<section class="wrapper">
+				<div class="heading">
+					<h1 class="text text-large">LogOut</h1>
+					<p class="text text-normal">
+						New user?
+						<span>
+							<a href="./signup.html" class="text text-links">Create an account</a>
+						</span>
+					</p>
+				</div>
+				<div class="form">
+					<div class="input-control">
+						<a href="{% url 'home_page' %}" class="text-center input-submit login-bg-blue">Home Page</a>
+						<a href="{% url 'login_page' %}" class="text-center input-submit login-bg-blue">Sign In</a>
+					</div>
+				</div>
+			</section>
+		</div>
+		</div>
+	</main>
+</section>
+{% endblock content %}
