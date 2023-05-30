@@ -32,3 +32,11 @@ def user_login(request):
 
 class UserProfileView(TemplateView):
     template_name = "registration/profile.html"
+
+
+def dashboard_view(request):
+    user = request.user
+
+    context = {"user": user}
+
+    return render(request, "registration/profile.html")

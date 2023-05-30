@@ -1,7 +1,7 @@
 {% extends 'news/base.html' %}
 {% load static %}
 
-{% block title %} LogOut page {% endblock title %}
+{% block title %} {{ user.username }} {% endblock title %}
 {% block content %}
 
   <div class="container rounded bg-white mt-5">
@@ -9,9 +9,9 @@
       <div class="col-md-4 border-right">
         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
           <img class="rounded-circle mt-5" src="{% static 'images/person-1.jpg' %}" width="90">
-          <span class="font-weight-bold">John Doe</span>
-          <span class="text-black-50">john_doe12@bbb.com</span>
-          <span>Javohir-dev</span>
+          <span class="font-weight-bold">{{ user.first_name }} {{ user.last_name }}</span>
+          <span class="text-black-50">{{ user.email }}</span>
+          <span>{{ user.username }}</span>
         </div>
       </div>
       <div class="col-md-8">
@@ -21,20 +21,21 @@
           </div>
           <div class="row mt-3">
             <div class="col-md-6 mt-4">
-              <input type="text" name="username" class="form-control" placeholder="Username" value="Javohir-dev">
+              <input type="text" name="username" class="form-control" placeholder="Username" value="Javohir-dev" disabled>
             </div>
             <div class="col-md-6 mt-4">
-              <input ype="text" name="forst_name" class="form-control" placeholder="Email" value="javohir.py@gmail.com">
+              <input ype="text" name="forst_name" class="form-control" placeholder="Email" value="javohir.py@gmail.com" disabled>
             </div>
             <div class="col-md-6 mt-4">
-              <input type="text" name="forst_name" class="form-control" placeholder="first name" value="John">
+              <input type="text" name="forst_name" class="form-control" placeholder="first name" value="John" disabled>
             </div>
             <div class="col-md-6 mt-4">
-              <input type="text" name="last_name" class="form-control" placeholder="last name" value="Doe">
+              <input type="text" name="last_name" class="form-control" placeholder="last name" value="Doe" disabled>
             </div>
           </div>
-          <div class="mt-5 text-right"><button class="btn btn-primary profile-button" type="button">Save
-              Profile</button></div>
+          <div class="mt-5 text-right">
+            <a href="{% url '404_page' %}" class="btn btn-primary profile-button" type="button">Change password</a>
+          </div>
         </div>
       </div>
     </div>

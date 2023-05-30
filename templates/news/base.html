@@ -88,9 +88,20 @@
               <i class="bi bi-person-circle"></i>
             </button>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="{% url 'profile_page' %}">Profile</a></li>
-              <li><a class="dropdown-item" href="{% url 'login_page' %}">LogIn</a></li>
-              <li><a class="dropdown-item" href="{% url 'logout_page' %}">LogOut</a></li>
+              {% if request.user.is_authenticated %}
+                <li class="d-flex align-items-center dropdown-item">
+                  <i class="bi bi-person-bounding-box"> </i>
+                  <a class="m-2" href="{% url 'profile_page' %}">Profile</a>
+                </li>
+                <li class="d-flex align-items-center dropdown-item">
+                  <i class="bi bi-box-arrow-right"> </i>
+                  <a class="m-2" href="{% url 'logout_page' %}">LogOut</a>
+                </li>
+                {% else %}
+                <li class="d-flex align-items-center dropdown-item">
+                  <a class="m-2" href="{% url 'login_page' %}">LogIn</a>
+                </li>
+              {% endif %}
             </ul>
           </div>
           <i class="bi bi-list mobile-nav-toggle" style="padding-left:30px"></i>
