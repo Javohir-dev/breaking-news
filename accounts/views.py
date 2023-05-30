@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
+from django.views.generic import ListView, TemplateView
 from .forms import LoginForm
 
 
@@ -27,3 +28,7 @@ def user_login(request):
 
     context = {"form": form}
     return render(request, "registration/login.html", context)
+
+
+class UserProfileView(TemplateView):
+    template_name = "registration/profile.html"
