@@ -4,4 +4,5 @@ Texno_news doesn't found! = Fixed
 About us qismini templatega ulashim kerak = Done
 Xodimlar uchun model yozib AboutUs page-ga ulash kerak = Done
 ^^ About page-ga emas alohida staff.html ochib ichiga tartib bilan ulandi)
-NewsEdit page-dagi inlutlarni donalab ulash kerak tayyor templat ejuda xunuk
+NewsEdit page-dagi inlutlarni donalab ulash kerak tayyor templat ejuda xunuk = Done
+PasswordChangeView bilan muammo bovotti shuni to'g'irlavorish kere, guruhga savol yuborilgan
