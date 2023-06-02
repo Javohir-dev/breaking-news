@@ -91,15 +91,15 @@
               {% if request.user.is_authenticated %}
                 <li class="d-flex align-items-center dropdown-item">
                   <i class="bi bi-person-bounding-box"> </i>
-                  <a class="m-2" href="{% url 'profile_page' %}">Profile</a>
+                  <a class="m-2 w-100" href="{% url 'profile_page' %}">Profile</a>
                 </li>
                 <li class="d-flex align-items-center dropdown-item">
                   <i class="bi bi-box-arrow-right"> </i>
-                  <a class="m-2" href="{% url 'logout_page' %}">LogOut</a>
+                  <a class="m-2 w-100" href="{% url 'logout_page' %}">LogOut</a>
                 </li>
                 {% else %}
                 <li class="d-flex align-items-center dropdown-item">
-                  <a class="m-2" href="{% url 'login_page' %}">LogIn</a>
+                  <a class="m-2 w-100" href="{% url 'login_page' %}">LogIn</a>
                 </li>
               {% endif %}
             </ul>

@@ -39,4 +39,4 @@ def dashboard_view(request):
 
     context = {"user": user}
 
-    return render(request, "registration/profile.html")
+    return render(request, "registration/profile.html", context)

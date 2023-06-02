@@ -8,7 +8,7 @@
     <div class="row align-items-center">
       <div class="col-md-4 border-right">
         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-          <img class="rounded-circle mt-5" src="{% static 'images/person-1.jpg' %}" width="90">
+          <img class="rounded-circle mt-5" src="{{ user.image.url }}" width="90">
           <span class="font-weight-bold">{{ user.first_name }} {{ user.last_name }}</span>
           <span class="text-black-50">{{ user.email }}</span>
           <span>{{ user.username }}</span>
@@ -34,7 +34,7 @@
             </div>
           </div>
           <div class="mt-5 text-right">
-            <a href="{% url '404_page' %}" class="btn btn-primary profile-button" type="button">Change password</a>
+            <a href="{% url 'password_change' %}" class="btn btn-primary profile-button" type="button">Change password</a>
           </div>
         </div>
       </div>
