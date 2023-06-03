@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
-from django.views.generic import ListView, TemplateView
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views.generic import ListView, TemplateView, CreateView, View
 from .forms import LoginForm, UserRegistrationForm
 
 
@@ -57,3 +59,26 @@ def user_reginter(request):
         context = {"form": form}
 
         return render(request, "account/register.html", {"form": form})
+
+
+# class SignUpView(CreateView):
+#     form_class = UserCreationForm
+#     success_url = reverse_lazy("login_page")
+#     template_name = "account/register.html"
+
+
+class SignUpView(View):
+    def get(self, request):
+        form = UserRegistrationForm()
+        context = {"form": form}
+
+        return render(request, "account/register.html", context)
+
+    def post(self, request):
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data["password"])
+            new_user.save()
+            context = {"new_user": new_user}
+            return render(request, "account/register-done.html", context)
