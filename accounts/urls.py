@@ -5,11 +5,12 @@ from django.contrib.auth.views import (
     PasswordChangeView,
     PasswordChangeDoneView,
 )
-from .views import dashboard_view
+from .views import dashboard_view, user_reginter
 
 
 urlpatterns = [
     # path("login/", user_login, name="login_page"),
+    path("signup/", user_reginter, name="register_page"),
     path("login/", LoginView.as_view(), name="login_page"),
     path("logout/", LogoutView.as_view(), name="logout_page"),
     path("password-change/", PasswordChangeView.as_view(), name="password_change"),

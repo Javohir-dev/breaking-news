@@ -1,0 +1,66 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} Sign-Up page {% endblock title %}
+{% block content %}
+<section class="main_login">
+	<!-- <a href="./index.html" target="_blank" rel="noopener noreferrer">Go Back</a> -->
+	<main class="login">
+		<div class="container">
+			<section class="wrapper">
+				<div class="heading">
+					<h1 class="text text-large">Sign Up</h1>
+					<p class="text text-normal">
+						Already have an account?
+						<span>
+							<a href="{% url 'login_page' %}" class="text text-links">
+								LogIn
+							</a>
+						</span>
+					</p>
+				</div>
+				<form method="post" name="signin" class="form">{% csrf_token %}
+					<div class="input-control">
+						<input type="username" name="username" id="username" class="input-field" placeholder="Username" />
+					</div>
+					<div class="input-control">
+						<input type="text" name="first_name" id="first_name" class="input-field" placeholder="First name" maxlength="150" />
+					</div>
+					<div class="input-control">
+						<input type="text" name="last_name" id="last_name" class="input-field" placeholder="Last name" maxlength="150" />
+					</div>
+					<div class="input-control">
+						<input type="email" name="email" id="email" class="input-field" placeholder="Email Address" maxlength="254" />
+					</div>
+					<div class="input-control">
+						<input type="password" name="password" id="password" class="input-field" placeholder="Password" />
+					</div>
+					<div class="input-control">
+						<input type="password" name="password2" id="password2" class="input-field"
+							placeholder="Confirm Password" />
+					</div>
+                    {% comment %} <div class="input-control">
+                        <input type="file" name="image" id="name" class="input-field" placeholder="Image" />
+                    </div> {% endcomment %}
+					<div class="input-control">
+						<a href="#" class="text text-links">Forgot Password</a>
+						<button type="submit" name="submit" class="input-submit login-bg-blue">Sign Up</button>
+					</div>
+				</form>
+				<div class="form">
+					<div class="d-flex flex-column">
+						<a href="#!" type="submit" name="submit" class="input-submit login-bg-red my-2 text-center">
+							password recovery
+						</a>
+					</div>
+				</div>
+			</section>
+		</div>
+		</div>
+	</main>
+    <form method='post'>{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" name="submit" class="input-submit login-bg-blue">Sign Up</button>
+    </form>
+</section>
+{% endblock content %}

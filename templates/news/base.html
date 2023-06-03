@@ -95,11 +95,14 @@
                 </li>
                 <li class="d-flex align-items-center dropdown-item">
                   <i class="bi bi-box-arrow-right"> </i>
-                  <a class="m-2 w-100" href="{% url 'logout_page' %}">LogOut</a>
+                  <a class="m-2 w-100" href="{% url 'logout_page' %}">SignOut</a>
                 </li>
                 {% else %}
                 <li class="d-flex align-items-center dropdown-item">
-                  <a class="m-2 w-100" href="{% url 'login_page' %}">LogIn</a>
+                  <a class="m-2 w-100" href="{% url 'login_page' %}">SignIn</a>
+                </li>
+                <li class="d-flex align-items-center dropdown-item">
+                  <a class="m-2 w-100" href="{% url 'register_page' %}">SignUp</a>
                 </li>
               {% endif %}
             </ul>

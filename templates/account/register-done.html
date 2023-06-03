@@ -1,0 +1,24 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} {{ request.user.username }} successfully registrated {% endblock title %}
+{% block content %}
+<section class="main_login">
+	<main class="main login ">
+		<div class="container">
+			<section class="wrapper">
+				<div class="heading">
+					<h2 class="text text-large">{{ request.user.username }}, your successfully registrated.</h2>
+				</div>
+				<div class="form">
+					<div class="input-control">
+						<a href="{% url 'home_page' %}" class="text-center input-submit login-bg-blue">Home Page</a>
+						<a href="{% url 'login_page' %}" class="text-center input-submit login-bg-blue">SignIn</a>
+					</div>
+				</div>
+			</section>
+		</div>
+		</div>
+	</main>
+</section>
+{% endblock content %}
