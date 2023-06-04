@@ -4,7 +4,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, CreateView, View
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
+from .models import Profile
 
 
 def user_login(request):
@@ -38,8 +39,12 @@ class UserProfileView(TemplateView):
 
 def dashboard_view(request):
     user = request.user
+    profile = Profile.objects.get(user=user)
 
-    context = {"user": user}
+    context = {
+        "user": user,
+        "profile": profile,
+    }
 
     return render(request, "registration/profile.html", context)
 
@@ -51,6 +56,7 @@ def user_reginter(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(user_form.cleaned_data["password"])
             new_user.save()
+            Profile.objects.create(user=new_user)
             context = {"new_user": new_user}
             return render(request, "account/register-done.html", context)
 
@@ -82,3 +88,22 @@ class SignUpView(View):
             new_user.save()
             context = {"new_user": new_user}
             return render(request, "account/register-done.html", context)
+
+
+def user_edit(request):
+    if request.method == "POST":
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+
+    context = {
+        "user_form": user_form,
+        "profile_form": profile_form,
+    }
+    return render(request, "account/profile-edit.html", context)

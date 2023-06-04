@@ -5,7 +5,7 @@ from django.contrib.auth.views import (
     PasswordChangeView,
     PasswordChangeDoneView,
 )
-from .views import dashboard_view, user_reginter, SignUpView
+from .views import dashboard_view, user_reginter, SignUpView, user_edit
 
 
 urlpatterns = [
@@ -20,4 +20,5 @@ urlpatterns = [
         name="password_change_done",
     ),
     path("profile/", dashboard_view, name="profile_page"),
+    path("edit-profile/", user_edit, name="edit_profile_page"),
 ]
