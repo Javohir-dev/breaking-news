@@ -36,7 +36,7 @@
               <input type="file" name="photo" class="form-control" id="id_image" />
             </div>
             <div class="col-md-6 mt-4">
-              <input type="text" name="birth_date" class="form-control" placeholder="birth date" value="{{ profile.birth_date }}" />
+              <input type="text" name="birth_date" class="form-control" placeholder="Feb. 22, 2002" value="{{ profile.birth_date }}" />
             </div>
           </div>
           <div class="mt-5 text-right">
@@ -47,9 +47,9 @@
       </div>
     </div>
   </div>
-  <form method="post" enctype="multipart/form-data">{% csrf_token %}
+  {% comment %} <form method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ user_form.as_p }}
     {{ profile_form.as_p }}
     <button type="submit">save to change</button>
-  </form>
+  </form> {% endcomment %}
 {% endblock content %}

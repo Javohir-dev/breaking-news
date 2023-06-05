@@ -91,6 +91,8 @@ class SignUpView(View):
 
 
 def user_edit(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
     if request.method == "POST":
         user_form = UserEditForm(instance=request.user, data=request.POST)
         profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST)
@@ -105,5 +107,6 @@ def user_edit(request):
     context = {
         "user_form": user_form,
         "profile_form": profile_form,
+        "profile": profile,
     }
     return render(request, "account/profile-edit.html", context)
