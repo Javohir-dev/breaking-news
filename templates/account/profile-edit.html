@@ -40,16 +40,15 @@
             </div>
           </div>
           <div class="mt-5 text-right">
-            <a href="{% url 'password_change' %}" class="btn btn-primary profile-button" type="button">Change password</a>
-            <button class="btn btn-primary profile-button" type="submit" style="background-color: #3a9302;">Change password</button>
+            <button class="btn btn-primary profile-button" type="submit" style="background-color: #3a9302;">Save Change</button>
           </div>
         </form>
       </div>
     </div>
   </div>
-  {% comment %} <form method="post" enctype="multipart/form-data">{% csrf_token %}
+  <form method="post" enctype="multipart/form-data">{% csrf_token %}
     {{ user_form.as_p }}
     {{ profile_form.as_p }}
     <button type="submit">save to change</button>
-  </form> {% endcomment %}
+  </form>
 {% endblock content %}

@@ -1,7 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, CreateView, View
 from .forms import LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
@@ -37,6 +39,7 @@ class UserProfileView(TemplateView):
     template_name = "registration/profile.html"
 
 
+@login_required
 def dashboard_view(request):
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -90,6 +93,7 @@ class SignUpView(View):
             return render(request, "account/register-done.html", context)
 
 
+@login_required
 def user_edit(request):
     user = request.user
     profile = Profile.objects.get(user=user)
@@ -100,6 +104,7 @@ def user_edit(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
+            return redirect("profile_page")
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
@@ -110,3 +115,30 @@ def user_edit(request):
         "profile": profile,
     }
     return render(request, "account/profile-edit.html", context)
+
+
+class EditUserView(LoginRequiredMixin, View):
+    def get(self, request):
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+        context = {
+            "user_form": user_form,
+            "profile_form": profile_form,
+            "profile": profile,
+        }
+
+        return render(request, "account/profile-edit.html", context)
+
+    def post(self, request):
+        user = request.user
+        profile = Profile.objects.get(user=user)
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile, data=request.POST)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+        return redirect("profile_page")
