@@ -1,11 +1,8 @@
-from typing import Any, Dict
-from django.db.models.query import QuerySet
-from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
-from django.forms import ModelForm
+from news_project.custom_permissions import OnlySuperUsers
+from django.contrib.auth.decorators import login_required
 from django.views.generic import (
-    View,
     TemplateView,
     ListView,
     UpdateView,
@@ -36,6 +33,7 @@ class AboutView(ListView):
         return context
 
 
+# @login_required
 def detail_page(request, news):
     news = get_object_or_404(News, slug=news, status=News.Status.Published)
     latest_news = News.published.all().order_by("-published_time")[:6]
@@ -256,42 +254,20 @@ class SportNewsListView(ListView):
         return news
 
 
-class NewsUpdateView(UpdateView):
+class NewsUpdateView(OnlySuperUsers, UpdateView):
     model = News
     fields = ["title", "body", "image", "category"]
     template_name = "crud/news-edit.html"
 
 
-class NewsDeleteView(DeleteView):
+class NewsDeleteView(OnlySuperUsers, DeleteView):
     model = News
     template_name = "crud/news-delete.html"
     success_url = reverse_lazy("home_page")
 
 
-class NewsCreateView(CreateView):
+class NewsCreateView(OnlySuperUsers, CreateView):
     model = News
     template_name = "crud/news-create.html"
     fields = ["title", "body", "image", "category", "status"]
     # success_url = reverse_lazy("home_page")
-
-
-# class NewsCreateView(View):
-#     def get(self, request):
-#         form = News.objects.all()
-#         return render(request, "crud/news-create.html", {"form": form})
-
-#     def post(self, request):
-#         title = request.POST["title"]
-#         body = request.POST["body"]
-#         image = request.POST["image"]
-#         category = request.POST["category"]
-#         status = request.POST["status"]
-
-#         news = News.objects.create(
-#             title=title,
-#             body=body,
-#             image=image,
-#             category=category,
-#             status=status,
-#         )
-#         news.save()

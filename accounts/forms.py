@@ -11,7 +11,7 @@ class LoginForm(forms.Form):
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label="Password", widget=forms.PasswordInput)
     password2 = forms.CharField(label="Password Confirm", widget=forms.PasswordInput)
-    # image = forms.ImageField()
+    image = forms.ImageField()
 
     class Meta:
         model = User
