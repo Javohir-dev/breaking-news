@@ -48,12 +48,12 @@
       <a href="{% url 'home_page' %}" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo
         <img src="{% static '' %}images/logo.png" alt=""> -->
-        <h1>ZenBlog</h1>
+        <h1>Breaking News</h1>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="dropdown">
+          {% comment %} <li class="dropdown">
             <a href="{% url 'last_news_page' %}">
               <span>Categories</span>
               <i class="bi bi-chevron-down dropdown-indicator"></i>
@@ -64,18 +64,19 @@
               <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
               <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
             </ul>
-          </li>
+          </li> {% endcomment %}
+          <li><a href="{% url 'local_news_page' %}">Mahalliy</a></li>
+          <li><a href="{% url 'texno_news_page' %}">Texno</a></li>
+          <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
+          <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
           <li><a href="{% url 'about_page' %}">About</a></li>
           <li><a href="{% url 'staff_page' %}">Staff</a></li>
           <li><a href="{% url 'contact_page' %}">Contact</a></li>
-          <li><a href="{% url '404_page' %}">404-page</a></li>
-          {% comment %} <li><a href="{% url 'login_page' %}">LogIn</a></li> {% endcomment %}
-          <li><a href="{% url '404_page' %}">Sign-Up</a></li>
-          
+          {% if request.user.is_superuser %}
           <li>
             <a href="{% url 'news_create_page' %}" type="submit" class="btn btn-secondary btn-sm px-3 py-2 ml-3" style="margin-left: 0.8rem;">Create</a>
           </li>
-          
+          {% endif %}
         </ul>
       </nav><!-- .navbar -->
         

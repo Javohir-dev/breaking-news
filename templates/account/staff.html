@@ -20,8 +20,8 @@
           </div>
 
           {% for person in staff_list %}
-            <div class="col-lg-4 text-center mb-5">
-              <img src="{{ person.image.url }}" alt="" class="img-fluid rounded-circle w-50 mb-4">
+            <div class="col-lg-6 text-center mb-5 d-flex flex-column align-items-center">
+              <img src="{{ person.image.url }}" alt="" class="inline-block rounded-circle w-50 mb-4">
               <h4>{{ person.first_name }} {{ person.last_name }}</h4>
               <span class="d-block mb-3 text-uppercase">{{ person.occupation }}</span>
               <p>{{ person.staff_info }}</p>

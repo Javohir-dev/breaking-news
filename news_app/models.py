@@ -77,7 +77,7 @@ class Staff(models.Model):
 
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    staff_info = models.TextField()
+    staff_info = models.TextField(max_length=250)
     image = models.ImageField(upload_to="staff/images")
     occupation = models.ForeignKey(Occupation, on_delete=models.CASCADE)
     status = models.CharField(

@@ -16,10 +16,12 @@
                 <span class="date">{{ news.category }}</span>
                 <span class="mx-1">&bullet;</span>
                 <span>{{ news.published_time }}</span>
+                {% if request.user.is_superuser %}
                 <div class="" style="display: inline-block;">
                   <a href="{% url 'news_edit_page' news.slug %}" type="submit" class="btn btn-primary btn-sm my-0">edit</a>
                   <a href="{% url 'news_delete_page' news.slug %}" type="submit" class="btn btn-secondary btn-sm my-0">delete</a>
                 </div>
+                {% endif %}
               </div>
               <h1 class="mb-5">{{ news.title }}</h1>
               <figure class="my-4">

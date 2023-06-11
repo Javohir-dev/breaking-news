@@ -98,7 +98,7 @@ class HomePageView(ListView):
 
 class StaffPageView(ListView):
     model = Staff
-    template_name = "news/staff.html"
+    template_name = "account/staff.html"
     context_object_name = "staff"
 
     def get_context_data(self, **kwargs):
