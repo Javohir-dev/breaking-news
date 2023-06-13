@@ -1,5 +1,5 @@
 from django import forms
-from .models import Contact, News
+from .models import Contact, News, Comment
 
 
 class ContactForm(forms.ModelForm):
@@ -18,3 +18,9 @@ class NewsCreateForm(forms.ModelForm):
             "body": forms.TextInput(attrs={"class": "form-control"}),
             "image": forms.TextInput(attrs={"class": "form-control"}),
         }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["user", "body"]
