@@ -10,7 +10,7 @@ from django.views.generic import (
     DeleteView,
 )
 from .models import News, Category, Occupation, Staff
-from .forms import ContactForm, NewsCreateForm
+from .forms import ContactForm, CommentForm
 
 
 def news_list(request):
@@ -36,6 +36,17 @@ class AboutView(ListView):
 # @login_required
 def detail_page(request, news):
     news = get_object_or_404(News, slug=news, status=News.Status.Published)
+    comments = news.comments.filter(active=True)
+    new_comment = None
+    if request.method == "POST":
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.news = news
+            new_comment.user = request.user
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
     latest_news = News.published.all().order_by("-published_time")[:6]
     foreign_news = News.objects.all().filter(category__name="Xorijiy")
     local_news = News.objects.all().filter(category__name="Mahalliy")
@@ -57,6 +68,9 @@ def detail_page(request, news):
 
     context = {
         "news": news,
+        "comments": comments,
+        "new_comment": new_comment,
+        "comment_form": comment_form,
         "latest_news": latest_news,
         "first_letter": first_letter,
         "categories": categories,
