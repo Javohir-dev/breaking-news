@@ -47,6 +47,7 @@ def detail_page(request, news):
             new_comment.save()
     else:
         comment_form = CommentForm()
+    comment_count = comments.count()
     latest_news = News.published.all().order_by("-published_time")[:6]
     foreign_news = News.objects.all().filter(category__name="Xorijiy")
     local_news = News.objects.all().filter(category__name="Mahalliy")
@@ -71,6 +72,7 @@ def detail_page(request, news):
         "comments": comments,
         "new_comment": new_comment,
         "comment_form": comment_form,
+        "comment_count": comment_count,
         "latest_news": latest_news,
         "first_letter": first_letter,
         "categories": categories,
