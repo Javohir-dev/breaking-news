@@ -7,3 +7,4 @@ Xodimlar uchun model yozib AboutUs page-ga ulash kerak = Done
 NewsEdit page-dagi inlutlarni donalab ulash kerak tayyor templat ejuda xunuk
 
 -Home page-dagi ("SEE ALL MAHALLIY")ni click qilganda aynan o'sha category page-ga o'tishi kerak.
+alohida categoriya sahifalarida sportda o'ng tomonida sport chiqmasligi kerak

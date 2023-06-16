@@ -53,7 +53,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          {% comment %} <li class="dropdown">
+          <li class="dropdown">
             <a href="{% url 'last_news_page' %}">
               <span>Categories</span>
               <i class="bi bi-chevron-down dropdown-indicator"></i>
@@ -64,14 +64,19 @@
               <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
               <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
             </ul>
-          </li> {% endcomment %}
-          <li><a href="{% url 'local_news_page' %}">Mahalliy</a></li>
+          </li>
+          {% comment %} <li><a href="{% url 'local_news_page' %}">Mahalliy</a></li>
           <li><a href="{% url 'texno_news_page' %}">Texno</a></li>
           <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
-          <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
+          <li><a href="{% url 'sport_news_page' %}">Sport</a></li> {% endcomment %}
           <li><a href="{% url 'about_page' %}">About</a></li>
           <li><a href="{% url 'staff_page' %}">Staff</a></li>
           <li><a href="{% url 'contact_page' %}">Contact</a></li>
+          <form method="get" action="{% url 'search_result_page' %}" class="search-form" style="padding: 10px 0 10px 30px;">
+            {% comment %} <span class="icon bi-search"></span> {% endcomment %}
+            <input type="search" name="q" placeholder="Search" class="form-control" />
+            <span class="js-search-close"></span>
+          </form>
           {% if request.user.is_superuser %}
           <li>
             <a href="{% url 'news_create_page' %}" type="submit" class="btn btn-secondary btn-sm px-3 py-2 ml-3" style="margin-left: 0.8rem;">Create</a>
@@ -82,8 +87,8 @@
         
 
       <div class="position-relative d-flex align-items-center">
-        <div class=" d-flex align-items-center">
-          <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
+        <div class="d-flex align-items-center">
+        <span class="js-search-open"></span>
           <div class="dropdown me-1" style="padding: 10px 0 10px 30px;">
             <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">
               <i class="bi bi-person-circle"></i>
@@ -111,15 +116,15 @@
           <i class="bi bi-list mobile-nav-toggle" style="padding-left:30px"></i>
         </div>
 
-        <!-- ======= Search Form ======= -->
+        {% comment %} <!-- ======= Search Form ======= -->
         <div class="search-form-wrap js-search-form-wrap" style="margin-top: 11px;">
-          <form action="search-result.html" class="search-form">
+          <form method="get" class="search-form">
             <span class="icon bi-search"></span>
-            <input type="text" placeholder="Search" class="form-control">
-            <button class="btn js-search-close"><span class="bi-x"></span></button>
+            <input type="search" name="q" placeholder="Search" class="form-control" />
+            <button class="btn js-search-close"><span class=""></span></button>
           </form>
-        </div><!-- End Search Form -->
-
+        </div><!-- End Search Form --> {% endcomment %}
+        <!-- ======= Search Form ======= -->
       </div>
 
     </div>

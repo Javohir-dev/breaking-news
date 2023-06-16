@@ -15,6 +15,7 @@ from .views import (
     NewsDeleteView,
     NewsUpdateView,
     NewsCreateView,
+    SearchResultView,
 )
 
 
@@ -35,4 +36,5 @@ urlpatterns = [
     path("news/<slug>/delete/", NewsDeleteView.as_view(), name="news_delete_page"),
     path("news/<slug>/edit/", NewsUpdateView.as_view(), name="news_edit_page"),
     path("create/", NewsCreateView.as_view(), name="news_create_page"),
+    path("search-result/", SearchResultView.as_view(), name="search_result_page"),
 ]

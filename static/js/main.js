@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavToogleButton = document.querySelector('.mobile-nav-toggle');
 
   if (mobileNavToogleButton) {
-    mobileNavToogleButton.addEventListener('click', function(event) {
+    mobileNavToogleButton.addEventListener('click', function (event) {
       event.preventDefault();
       mobileNavToogle();
     });
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const navDropdowns = document.querySelectorAll('.navbar .dropdown > a');
 
   navDropdowns.forEach(el => {
-    el.addEventListener('click', function(event) {
+    el.addEventListener('click', function (event) {
       if (document.querySelector('.mobile-nav-active')) {
         event.preventDefault();
         this.classList.toggle('active');
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
    */
   const scrollTop = document.querySelector('.scroll-top');
   if (scrollTop) {
-    const togglescrollTop = function() {
+    const togglescrollTop = function () {
       window.scrollY > 100 ? scrollTop.classList.add('active') : scrollTop.classList.remove('active');
     }
     window.addEventListener('load', togglescrollTop);

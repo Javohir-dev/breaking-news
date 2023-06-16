@@ -165,11 +165,11 @@ section {
 }
 
 .search-form-wrap .search-form .form-control {
-  width: 300px;
+  width: 200px;
   border: none;
   box-shadow: 0 15px 20px -10px rgba(var(--color-black-rgb), 0.1);
-  padding-left: 40px;
-  padding-right: 40px;
+  /* padding-left: 40px; */
+  /* padding-right: 40px; */
 }
 
 .search-form-wrap .search-form .form-control:active,

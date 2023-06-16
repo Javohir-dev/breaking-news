@@ -1,3 +1,5 @@
+from django.db.models import Q
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from news_project.custom_permissions import OnlySuperUsers
@@ -162,7 +164,7 @@ class LocalNewsListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["local_news"] = News.published.all().filter(category__name="Mahalliy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")
         context["sport_news"] = News.published.all().filter(category__name="Sport")
         context["categories"] = Category.objects.all()
@@ -185,7 +187,7 @@ class ForeignNewsListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["local_news"] = News.published.all().filter(category__name="Mahalliy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")
         context["sport_news"] = News.published.all().filter(category__name="Sport")
         context["categories"] = Category.objects.all()
@@ -208,7 +210,7 @@ class TechnoNewsListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["local_news"] = News.published.all().filter(category__name="Mahalliy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")
         context["sport_news"] = News.published.all().filter(category__name="Sport")
         context["categories"] = Category.objects.all()
@@ -231,7 +233,7 @@ class LastNewsListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["local_news"] = News.published.all().filter(category__name="Mahalliy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")
         context["sport_news"] = News.published.all().filter(category__name="Sport")
         context["categories"] = Category.objects.all()
@@ -254,7 +256,7 @@ class SportNewsListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["foreign_news"] = News.published.all().filter(category__name="Xorijiy")
+        context["local_news"] = News.published.all().filter(category__name="Mahalliy")
         context["techno_news"] = News.published.all().filter(category__name="Texno")
         context["sport_news"] = News.published.all().filter(category__name="Sport")
         context["categories"] = Category.objects.all()
@@ -287,3 +289,25 @@ class NewsCreateView(OnlySuperUsers, CreateView):
     template_name = "crud/news-create.html"
     fields = ["title", "body", "image", "category", "status"]
     # success_url = reverse_lazy("home_page")
+
+
+class SearchResultView(ListView):
+    model = News
+    template_name = "news/search-result.html"
+    context_object_name = "news_list"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["local_news"] = News.published.all().filter(category__name="Mahalliy")
+        context["techno_news"] = News.published.all().filter(category__name="Texno")
+        context["sport_news"] = News.published.all().filter(category__name="Sport")
+        context["categories"] = Category.objects.all()
+        context["local_news_category"] = "Mahalliy"
+        context["sport_news_category"] = "Sport"
+        context["techno_news_category"] = "Texno"
+
+        return context
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        return News.objects.filter(Q(title__icontains=query) | Q(body__icontains=query))
