@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from news_project.custom_permissions import OnlySuperUsers
 from django.contrib.auth.decorators import login_required
+from hitcount.utils import get_hitcount_model
+from hitcount.views import HitCountMixin
 from django.views.generic import (
     TemplateView,
     ListView,
@@ -35,9 +37,28 @@ class AboutView(ListView):
         return context
 
 
+from hitcount.views import HitCountDetailView
+
+
+class PostCountHitDetailView(HitCountDetailView):
+    model = News  # your model goes here
+    count_hit = True  # set to True if you want it to try and count the hit
+
+
 # @login_required
 def detail_page(request, news):
     news = get_object_or_404(News, slug=news, status=News.Status.Published)
+    context = {}
+    hit_count = get_hitcount_model().objects.get_for_object(news)
+    hits = hit_count.hits
+    hitcontext = context["hitcount"] = {"pk": hit_count.pk}
+    hit_count_response = HitCountMixin.hit_count(request, hit_count)
+    if hit_count_response.hit_counted:
+        hits = hits + 1
+        hitcontext["hit_counted"] = hit_count_response.hit_counted
+        hitcontext["hit_message"] = hit_count_response.hit_message
+        hitcontext["total_hits"] = hits
+
     comments = news.comments.filter(active=True)
     new_comment = None
     if request.method == "POST":
