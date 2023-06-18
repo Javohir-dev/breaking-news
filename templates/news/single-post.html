@@ -1,5 +1,6 @@
 {% extends 'news/base.html' %}
 {% load static %}
+{% load hitcount_tags %}
 
 {% block title %} {{ news.title }} {% endblock title %}
 {% block content %}
@@ -26,6 +27,7 @@
               <h1 class="mb-5">{{ news.title }}</h1>
               <figure class="my-4">
                 <img src="{{ news.image.url }}" alt="" class="img-fluid" style="max-width: 95%">
+                <span>Views: {% get_hit_count for news %}</span>
               </figure>
               <p>
                 <span class="firstcharacter">{{ first_letter }}</span>{{ news_body }}

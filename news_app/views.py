@@ -53,6 +53,7 @@ def detail_page(request, news):
     hits = hit_count.hits
     hitcontext = context["hitcount"] = {"pk": hit_count.pk}
     hit_count_response = HitCountMixin.hit_count(request, hit_count)
+
     if hit_count_response.hit_counted:
         hits = hits + 1
         hitcontext["hit_counted"] = hit_count_response.hit_counted
@@ -61,6 +62,8 @@ def detail_page(request, news):
 
     comments = news.comments.filter(active=True)
     new_comment = None
+    comment_count = comments.count()
+
     if request.method == "POST":
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
@@ -70,7 +73,6 @@ def detail_page(request, news):
             new_comment.save()
     else:
         comment_form = CommentForm()
-    comment_count = comments.count()
     latest_news = News.published.all().order_by("-published_time")[:6]
     foreign_news = News.objects.all().filter(category__name="Xorijiy")
     local_news = News.objects.all().filter(category__name="Mahalliy")

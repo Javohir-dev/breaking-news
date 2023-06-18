@@ -1,5 +1,6 @@
 {% extends 'news/base.html' %}
 {% load static %}
+{% load hitcount_tags %}
 
 {% block title %} Texnologoya yangiliklari {% endblock title %}
 {% block content %}
@@ -28,24 +29,13 @@
                 <p>{{ news.body | truncatewords:30 }}</p>
                 <div class="d-flex align-items-center author">
                   <div class="name">
-                    <h3 class="m-0 p-0">Views:10</h3>
+                    <h3 class="m-0 p-0">Views: {% get_hit_count for news %}</h3>
                   </div>
                 </div>
               </div>
             </div>
             {% endfor %}
 
-            {% comment %} <div class="text-start py-4">
-              <div class="custom-pagination">
-                <a href="#" class="prev">Prevous</a>
-                <a href="#" class="active">1</a>
-                <a href="#">2</a>
-                <a href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-                <a href="#" class="next">Next</a>
-              </div>
-            </div> {% endcomment %}
           </div>
 
           <div class="col-md-3">
@@ -104,6 +94,7 @@
                       </div>
                       <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:10 }}</a></h2>
                       <span class="author mb-3 d-block">{{ news.published_time }}</span>
+                      <span class="author mb-3 d-block">Views: {% get_hit_count for news %}</span>
                     </div>
                   {% endfor %}
                 </div> <!-- End Popular -->
@@ -117,7 +108,7 @@
                         <span>{{ news.published_time }}</span>
                       </div>
                       <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
-                      <span class="author mb-3 d-block">Views:10</span>
+                      <span class="author mb-3 d-block">Views: {% get_hit_count for news %}</span>
                     </div>
                   {% endif %}
                 {% endfor %}
@@ -133,7 +124,7 @@
                         <span>{{ news.published_time }}</span>
                       </div>
                       <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
-                      <span class="author mb-3 d-block">Views:10</span>
+                      <span class="author mb-3 d-block">Views: {% get_hit_count for news %}</span>
                     </div>
                   {% endif %}
                 {% endfor %}
