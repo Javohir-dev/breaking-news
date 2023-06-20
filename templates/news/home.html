@@ -82,7 +82,7 @@
                   <span class="mx-1">&bullet;</span>
                   <span>{{ news.published_time }}</span>
                 </div>
-                {% comment %} <p class="mb-4 d-block">{{ news.body | truncatewords:30 }}</p> {% endcomment %}
+                <p class="mb-4 d-block">{{ news.body | truncatewords:30 }}</p>
 
                 <div class="d-flex align-items-center author">
                   <div class="name">
@@ -172,7 +172,7 @@
 
       <div class="section-header d-flex justify-content-between align-items-center mb-5">
         <h2>Mahalliy</h2>
-        <div><a href="category.html" class="more">See All Mahalliy</a></div>
+        <div><a href="{% url 'local_news_page' %}" class="more">See All Mahalliy</a></div>
       </div>
 
       <div class="row">
@@ -287,7 +287,7 @@
 
       <div class="section-header d-flex justify-content-between align-items-center mb-5">
         <h2>Xorijiy</h2>
-        <div><a href="category.html" class="more">See All Xorijiy</a></div>
+        <div><a href="{% url 'foreign_news_page' %}" class="more">See All Xorijiy</a></div>
       </div>
 
       <div class="row">
@@ -332,20 +332,6 @@
                 </div>
                 {% endif %}
               {% endfor %}
-
-              {% comment %} {% for news in foreign_news %}
-                {% if forloop.counter == 9 %}
-                <div class="post-entry-1">
-                  <div class="post-meta">
-                    <span class="date">{{ news.category }}</span>
-                    <span class="mx-1">&bullet;</span>
-                    <span>{{ news.published_time }}</span>
-                  </div>
-                  <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:11 }}</a></h2>
-                  <span class="author mb-3 d-block">Views: {% get_hit_count for news %}</span>
-                </div>
-                {% endif %}
-              {% endfor %} {% endcomment %}
             </div>
             {% for news in foreign_news %}
               {% if forloop.counter == 9 %}
@@ -398,7 +384,7 @@
 
       <div class="section-header d-flex justify-content-between align-items-center mb-5">
         <h2>Texnologiya</h2>
-        <div><a href="category.html" class="more">See All Texnologiya</a></div>
+        <div><a href="{% url 'texno_news_page' %}" class="more">See All Texnologiya</a></div>
       </div>
 
       <div class="row g-5">
@@ -500,7 +486,7 @@
 
       <div class="section-header d-flex justify-content-between align-items-center mb-5">
         <h2>Sport</h2>
-        <div><a href="category.html" class="more">See All Texnologiya</a></div>
+        <div><a href="{% url 'sport_news_page' %}" class="more">See All Sport</a></div>
       </div>
 
       <div class="row g-5">

@@ -65,10 +65,6 @@
               <li><a href="{% url 'sport_news_page' %}">Sport</a></li>
             </ul>
           </li>
-          {% comment %} <li><a href="{% url 'local_news_page' %}">Mahalliy</a></li>
-          <li><a href="{% url 'texno_news_page' %}">Texno</a></li>
-          <li><a href="{% url 'foreign_news_page' %}">Xorijiy</a></li>
-          <li><a href="{% url 'sport_news_page' %}">Sport</a></li> {% endcomment %}
           <li><a href="{% url 'about_page' %}">About</a></li>
           <li><a href="{% url 'staff_page' %}">Staff</a></li>
           <li><a href="{% url 'contact_page' %}">Contact</a></li>
@@ -115,16 +111,6 @@
           </div>
           <i class="bi bi-list mobile-nav-toggle" style="padding-left:30px"></i>
         </div>
-
-        {% comment %} <!-- ======= Search Form ======= -->
-        <div class="search-form-wrap js-search-form-wrap" style="margin-top: 11px;">
-          <form method="get" class="search-form">
-            <span class="icon bi-search"></span>
-            <input type="search" name="q" placeholder="Search" class="form-control" />
-            <button class="btn js-search-close"><span class=""></span></button>
-          </form>
-        </div><!-- End Search Form --> {% endcomment %}
-        <!-- ======= Search Form ======= -->
       </div>
 
     </div>
@@ -142,28 +128,41 @@
 
         <div class="row g-5">
           <div class="col-lg-4">
-            <h3 class="footer-heading">About ZenBlog</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam ab, perspiciatis beatae autem deleniti
-              voluptate nulla a dolores, exercitationem eveniet libero laudantium recusandae officiis qui aliquid
-              blanditiis omnis quae. Explicabo?</p>
-            <p><a href="about.html" class="footer-link-more">Learn More</a></p>
+            <h3 class="footer-heading">Breaking News</h3>
+            <p>Breaking News Bu mening birinchi Django yordamida qilgan vebsaytim.</p>
+            <p><a href="{% url 'about_page' %}" class="footer-link-more">Learn More</a></p>
           </div>
           <div class="col-6 col-lg-2">
             <h3 class="footer-heading">Navigation</h3>
             <ul class="footer-links list-unstyled">
-              <li><a href="{% url 'home_page' %}"><i class="bi bi-chevron-right"></i> Home</a></li>
-              <li><a href="category.html"><i class="bi bi-chevron-right"></i> Categories</a></li>
-              <li><a href="single-post.html"><i class="bi bi-chevron-right"></i> Single Post</a></li>
-              <li><a href="about.html"><i class="bi bi-chevron-right"></i> About us</a></li>
+              <li><a href="{% url 'about_page' %}"><i class="bi bi-chevron-right"></i> About</a></li>
+              <li><a href="{% url 'staff_page' %}"><i class="bi bi-chevron-right"></i> Staff</a></li>
               <li><a href="{% url 'contact_page' %}"><i class="bi bi-chevron-right"></i> Contact</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-2">
             <h3 class="footer-heading">Categories</h3>
             <ul class="footer-links list-unstyled">
-              {% for category in categories %}
-                <li><a href="category.html"><i class="bi bi-chevron-right"></i>{{ category.name }}</a></li>
-              {% endfor %}
+              <li>
+                <a href="{% url 'local_news_page' %}">
+                  <i class="bi bi-chevron-right"></i>Mahalliy
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'texno_news_page' %}">
+                  <i class="bi bi-chevron-right"></i>Texno
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'foreign_news_page' %}">
+                  <i class="bi bi-chevron-right"></i>Xorijiy
+                </a>
+              </li>
+              <li>
+                <a href="{% url 'sport_news_page' %}">
+                  <i class="bi bi-chevron-right"></i>Sport
+                </a>
+              </li>
             </ul>
           </div>
 
@@ -188,37 +187,6 @@
 
           </div>
         </div>
-      </div>
-    </div>
-
-    <div class="footer-legal">
-      <div class="container">
-
-        <div class="row justify-content-between">
-          <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-            <div class="copyright">
-              © Copyright <strong><span>ZenBlog</span></strong>. All Rights Reserved
-            </div>
-
-            <div class="credits">
-              Designed by <a href="https://github.com/Javohir-dev">Khamidullaev Javohir</a>
-            </div>
-
-          </div>
-
-          <div class="col-md-6">
-            <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div>
-
-          </div>
-
-        </div>
-
       </div>
     </div>
 

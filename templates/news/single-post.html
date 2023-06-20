@@ -114,11 +114,11 @@
                 <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
                   {% for news in this_news %}
                     <div class="post-entry-1 border-bottom">
-                      <div class="post-meta">
-                        <span class="date">{{ news.category }}</span>
+                      <div class="post-meta"><span class="date">{{ news.category }}</span> <span class="mx-1">&bullet;</span>
+                        <span>{{ news.published_time }}</span>
                       </div>
                       <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:10 }}</a></h2>
-                      <span class="author mb-3 d-block">{{ news.published_time }}</span>
+                      <span class="author mb-3 d-block">Views: {% get_hit_count for news %}</span>
                     </div>
                   {% endfor %}
                 </div> <!-- End Popular -->
@@ -132,7 +132,7 @@
                         <span>{{ news.published_time }}</span>
                       </div>
                       <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
-                      <span class="author mb-3 d-block">Views:10</span>
+                      <span class="author mb-3 d-block">Views: {% get_hit_count for news %}</span>
                     </div>
                   {% endif %}
                 {% endfor %}
@@ -148,7 +148,7 @@
                         <span>{{ news.published_time }}</span>
                       </div>
                       <h2 class="mb-2"><a href="{{ news.get_absolute_url }}">{{ news.title | truncatewords:13 }}</a></h2>
-                      <span class="author mb-3 d-block">Views:10</span>
+                      <span class="author mb-3 d-block">Views: {% get_hit_count for news %}</span>
                     </div>
                   {% endif %}
                 {% endfor %}
