@@ -1,2 +1,5 @@
 .vscode
 steps.txt
+.env
+__pycache__/
+db.sqlite3
