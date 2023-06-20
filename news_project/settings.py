@@ -13,6 +13,19 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 from environs import Env
 
+# +++++++++++ DJANGO +++++++++++
+import os
+import sys
+
+path = "/home/javohirdjango/breaking-news/"
+
+if path not in sys.path:
+    sys.path.insert(0, path)
+os.environ["DJANGO_SETTINGS_MODULE"] = "news_project.settings"
+from django.core.wsgi import get_wsgi_application
+
+application = get_wsgi_application()
+
 # Environsvariables
 env = Env()
 env.read_env()
@@ -83,14 +96,14 @@ WSGI_APPLICATION = "news_project.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+# DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 
 # Password validation
